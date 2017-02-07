@@ -1,6 +1,3 @@
-// ConsoleApplication1.cpp : Defines the entry point for the console application.
-//
-
 #include "stdafx.h"
 #include <iostream>
 #include <memory>
@@ -93,10 +90,10 @@ class Duck
 {
 public:
 	Duck(
-		unique_ptr<IFlyBehavior> && flyBehavior, 
+		unique_ptr<IFlyBehavior> && flyBehavior,
 		unique_ptr<IQuackBehavior> && quackBehavior,
 		unique_ptr<IDanceBehavior> && danceBehavior
-	)
+		)
 		: m_quackBehavior(move(quackBehavior))
 		, m_danceBehavior(move(danceBehavior))
 	{
