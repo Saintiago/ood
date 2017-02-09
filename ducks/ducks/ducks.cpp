@@ -3,6 +3,7 @@
 #include <memory>
 #include <cassert>
 #include <vector>
+#include <functional>
 
 using namespace std;
 
@@ -211,7 +212,6 @@ void PlayWithDuck(Duck & duck)
 	duck.Fly();
 	DrawDuck(duck);
 }
-
 
 void main()
 {

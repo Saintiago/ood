@@ -5,22 +5,38 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ducks", "ducks\ducks.vcxproj", "{1A131E5B-EF0E-42CB-A534-17F1982C555A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "proceduralDucks", "ConsoleApplication1\ConsoleApplication1.vcxproj", "{2C49617C-1882-4B7F-845D-0EAEF51C333F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A131E5B-EF0E-42CB-A534-17F1982C555A}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{1A131E5B-EF0E-42CB-A534-17F1982C555A}.Debug|x64.ActiveCfg = Debug|x64
 		{1A131E5B-EF0E-42CB-A534-17F1982C555A}.Debug|x64.Build.0 = Debug|x64
 		{1A131E5B-EF0E-42CB-A534-17F1982C555A}.Debug|x86.ActiveCfg = Debug|Win32
 		{1A131E5B-EF0E-42CB-A534-17F1982C555A}.Debug|x86.Build.0 = Debug|Win32
+		{1A131E5B-EF0E-42CB-A534-17F1982C555A}.Release|Any CPU.ActiveCfg = Release|Win32
 		{1A131E5B-EF0E-42CB-A534-17F1982C555A}.Release|x64.ActiveCfg = Release|x64
 		{1A131E5B-EF0E-42CB-A534-17F1982C555A}.Release|x64.Build.0 = Release|x64
 		{1A131E5B-EF0E-42CB-A534-17F1982C555A}.Release|x86.ActiveCfg = Release|Win32
 		{1A131E5B-EF0E-42CB-A534-17F1982C555A}.Release|x86.Build.0 = Release|Win32
+		{2C49617C-1882-4B7F-845D-0EAEF51C333F}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{2C49617C-1882-4B7F-845D-0EAEF51C333F}.Debug|x64.ActiveCfg = Debug|x64
+		{2C49617C-1882-4B7F-845D-0EAEF51C333F}.Debug|x64.Build.0 = Debug|x64
+		{2C49617C-1882-4B7F-845D-0EAEF51C333F}.Debug|x86.ActiveCfg = Debug|Win32
+		{2C49617C-1882-4B7F-845D-0EAEF51C333F}.Debug|x86.Build.0 = Debug|Win32
+		{2C49617C-1882-4B7F-845D-0EAEF51C333F}.Release|Any CPU.ActiveCfg = Release|Win32
+		{2C49617C-1882-4B7F-845D-0EAEF51C333F}.Release|x64.ActiveCfg = Release|x64
+		{2C49617C-1882-4B7F-845D-0EAEF51C333F}.Release|x64.Build.0 = Release|x64
+		{2C49617C-1882-4B7F-845D-0EAEF51C333F}.Release|x86.ActiveCfg = Release|Win32
+		{2C49617C-1882-4B7F-845D-0EAEF51C333F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
