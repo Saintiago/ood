@@ -10,20 +10,6 @@ typedef function<void()> fFly;
 typedef function<void()> fQuack;
 typedef function<void()> fDance;
 
-/*void DrawDuck(LambdaDuck const& duck)
-{
-	duck.Display();
-}
-
-void PlayWithDuck(LambdaDuck & duck)
-{
-	duck.Quack();
-	duck.Dance();
-	duck.Fly();
-	duck.Fly();
-	DrawDuck(duck);
-}*/
-
 class LambdaDuck
 {
 public:
@@ -65,20 +51,29 @@ private:
 	fDance m_Dance;
 };
 
-void Fly()
+fFly Fly = []()
 {
 	cout << "Swoosh!" << endl;
-}
+};
 
-void Dance()
+fFly NoFly = []() {};
+
+fDance DanceWaltz = []()
 {
-	cout << "Dance!" << endl;
-}
+	cout << "Dance Waltz!" << endl;
+};
 
-void Quack()
+fDance DanceMinuet = []()
+{
+	cout << "Dance Minuet!" << endl;
+};
+
+fQuack Quack = []()
 {
 	cout << "Quack!" << endl;
-}
+};
+
+fQuack NoQuack = []() {};
 
 fFly GetFlyAndCount()
 {
@@ -88,22 +83,25 @@ fFly GetFlyAndCount()
 	};
 }
 
+void DrawDuck(LambdaDuck const& duck)
+{
+	duck.Display();
+}
+
+void PlayWithDuck(LambdaDuck & duck)
+{
+	duck.Quack();
+	duck.Dance();
+	duck.Fly();
+	duck.Fly();
+	DrawDuck(duck);
+}
+
 void main()
 {
-	LambdaDuck lambdaDuck(GetFlyAndCount(), Quack, Dance);
-	LambdaDuck lambdaDuck2(GetFlyAndCount(), Quack, Dance);
+	LambdaDuck MallardDuck(GetFlyAndCount(), Quack, DanceWaltz);
+	LambdaDuck ModelDuck(NoFly, NoQuack, DanceMinuet);
 
-	lambdaDuck.Quack();
-	lambdaDuck.Dance();
-	lambdaDuck.Fly();
-	lambdaDuck.Fly();
-	lambdaDuck.Fly();
-
-	lambdaDuck.Display();
-
-	lambdaDuck2.Fly();
-	lambdaDuck2.Fly();
-	lambdaDuck2.Fly();
-
-	lambdaDuck.Fly();
+	PlayWithDuck(MallardDuck);
+	PlayWithDuck(ModelDuck);
 }
