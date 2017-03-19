@@ -30,8 +30,53 @@ private:
 	}
 };
 
+class SensorStat
+{
+public:
+	SensorStat(string name)
+		: m_name(name)
+	{}
+
+	void update(double value)
+	{
+		if (m_min > value)
+		{
+			m_min = value;
+		}
+		if (m_max < value)
+		{
+			m_max = value;
+		}
+		m_acc += value;
+		++m_countAcc;
+	}
+
+	void show()
+	{
+		std::cout << "Max " << m_name.c_str() << " " << m_max << std::endl;
+		std::cout << "Min " << m_name.c_str() << " " << m_min << std::endl;
+		std::cout << "Average " << m_name.c_str() << " " << (m_acc / m_countAcc) << std::endl;
+		std::cout << "----------------" << std::endl;
+	}
+
+private:
+	string m_name;
+
+	double m_min = std::numeric_limits<double>::infinity();
+	double m_max = -std::numeric_limits<double>::infinity();
+	double m_acc = 0;
+	unsigned m_countAcc = 0;
+};
+
 class CStatsDisplay : public IObserver<SWeatherInfo>
 {
+public:
+	CStatsDisplay()
+		: m_temperatureStat("Temperature")
+		, m_humidityStat("Humidity")
+		, m_pressureStat("Pressure")
+	{}
+
 private:
 	/* Метод Update сделан приватным, чтобы ограничить возможность его вызова напрямую
 	Классу CObservable он будет доступен все равно, т.к. в интерфейсе IObserver он
@@ -39,28 +84,19 @@ private:
 	*/
 	void Update(SWeatherInfo const& data) override
 	{
-		if (m_minTemperature > data.temperature)
-		{
-			m_minTemperature = data.temperature;
-		}
-		if (m_maxTemperature < data.temperature)
-		{
-			m_maxTemperature = data.temperature;
-		}
-		m_accTemperature += data.temperature;
-		++m_countAcc;
+		m_temperatureStat.update(data.temperature);
+		m_humidityStat.update(data.humidity);
+		m_pressureStat.update(data.pressure);
 
-		std::cout << "Max Temp " << m_maxTemperature << std::endl;
-		std::cout << "Min Temp " << m_minTemperature << std::endl;
-		std::cout << "Average Temp " << (m_accTemperature / m_countAcc) << std::endl;
-		std::cout << "----------------" << std::endl;
+		m_temperatureStat.show();
+		m_humidityStat.show();
+		m_pressureStat.show();
+		
 	}
 
-	double m_minTemperature = std::numeric_limits<double>::infinity();
-	double m_maxTemperature = -std::numeric_limits<double>::infinity();
-	double m_accTemperature = 0;
-	unsigned m_countAcc = 0;
-
+	SensorStat m_temperatureStat;
+	SensorStat m_humidityStat;
+	SensorStat m_pressureStat;
 };
 
 class CWeatherData : public CObservable<SWeatherInfo>
