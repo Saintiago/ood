@@ -1,7 +1,9 @@
 ﻿#pragma once
 
 #include <set>
+#include <map>
 #include <functional>
+#include <boost/range/adaptor/reversed.hpp>
 
 /*
 Шаблонный интерфейс IObserver. Его должен реализовывать класс, 
@@ -17,6 +19,16 @@ public:
 	virtual ~IObserver() = default;
 };
 
+template <class T>
+struct COrderedObserver : public IObserver<T>
+{
+	COrderedObserver(unsigned priorityParam = 0)
+		: priority(priorityParam)
+	{}
+
+	unsigned priority;
+};
+
 /*
 Шаблонный интерфейс IObservable. Позволяет подписаться и отписаться на оповещения, а также
 инициировать рассылку уведомлений зарегистрированным наблюдателям.
@@ -26,9 +38,9 @@ class IObservable
 {
 public:
 	virtual ~IObservable() = default;
-	virtual void RegisterObserver(IObserver<T> & observer) = 0;
+	virtual void RegisterObserver(COrderedObserver<T> & observer) = 0;
 	virtual void NotifyObservers() = 0;
-	virtual void RemoveObserver(IObserver<T> & observer) = 0;
+	virtual void RemoveObserver(COrderedObserver<T> & observer) = 0;
 };
 
 // Реализация интерфейса IObservable
@@ -36,25 +48,38 @@ template <class T>
 class CObservable : public IObservable<T>
 {
 public:
-	typedef IObserver<T> ObserverType;
+	typedef COrderedObserver<T> ObserverType;
 
 	void RegisterObserver(ObserverType & observer) override
 	{
-		m_observers.insert(&observer);
+		std::map<unsigned, std::set<ObserverType *>>::iterator it = m_observers.find(observer.priority);
+		if (it == m_observers.end())
+		{
+			m_observers.insert(pair<unsigned, std::set<ObserverType *>>(observer.priority, std::set<ObserverType *>()));
+		}
+		m_observers.at(observer.priority).insert(&observer);
 	}
 
 	void NotifyObservers() override
 	{
 		T data = GetChangedData();
-		for (auto & observer : m_observers)
+
+		for (auto & observerSetPair : boost::adaptors::reverse(m_observers))
 		{
-			observer->Update(data);
+			for (auto & observer : observerSetPair.second)
+			{
+				observer->Update(data);
+			}
 		}
 	}
 
 	void RemoveObserver(ObserverType & observer) override
 	{
-		m_observers.erase(&observer);
+		m_observers.at(observer.priority).erase(&observer);
+		if (m_observers.at(observer.priority).empty())
+		{
+			m_observers.erase(observer.priority);
+		}
 	}
 
 protected:
@@ -63,5 +88,5 @@ protected:
 	virtual T GetChangedData()const = 0;
 
 private:
-	std::set<ObserverType *> m_observers;
+	std::map<unsigned, std::set<ObserverType *>> m_observers;
 };

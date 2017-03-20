@@ -14,7 +14,7 @@ struct SWeatherInfo
 	double pressure = 0;
 };
 
-class CDisplay: public IObserver<SWeatherInfo>
+class CDisplay: public COrderedObserver<SWeatherInfo>
 {
 private:
 	/* Метод Update сделан приватным, чтобы ограничить возможность его вызова напрямую
@@ -68,7 +68,7 @@ private:
 	unsigned m_countAcc = 0;
 };
 
-class CStatsDisplay : public IObserver<SWeatherInfo>
+class CStatsDisplay : public COrderedObserver<SWeatherInfo>
 {
 public:
 	CStatsDisplay()
