@@ -44,7 +44,9 @@ struct WeatherStationFixture
 	MockDisplay mockDisplay3;
 
 	WeatherStationFixture()
-		: mockDisplay1(3, 1, &indexSequence, &wdTypeSequence)
+		: wdOut(WeatherStationType::OUT)
+		, wdIn(WeatherStationType::IN)
+		, mockDisplay1(3, 1, &indexSequence, &wdTypeSequence)
 		, mockDisplay2(2, 2, &indexSequence, &wdTypeSequence)
 		, mockDisplay3(1, 3, &indexSequence, &wdTypeSequence)
 	{}
@@ -76,8 +78,6 @@ BOOST_FIXTURE_TEST_SUITE(WeatherStation, WeatherStationFixture)
 
 		BOOST_CHECK_EQUAL(indexSequence, "123");
 	}
-
-	
 
 	// сообщает от какой именно станции пришло оповещение
 	BOOST_AUTO_TEST_CASE(notifies_observers_about_data_origin)

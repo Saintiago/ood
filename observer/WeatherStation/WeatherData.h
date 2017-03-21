@@ -108,6 +108,10 @@ private:
 class CWeatherData : public CObservable<SWeatherInfo>
 {
 public:
+	CWeatherData(WeatherStationType type = WeatherStationType::OUT)
+		: m_type(type)
+	{}
+
 	// Температура в градусах Цельсия
 	double GetTemperature()const
 	{
@@ -144,11 +148,12 @@ protected:
 		info.temperature = GetTemperature();
 		info.humidity = GetHumidity();
 		info.pressure = GetPressure();
-		info.wdType = WeatherStationType::IN;
+		info.wdType = m_type;
 		return info;
 	}
 private:
 	double m_temperature = 0.0;
 	double m_humidity = 0.0;	
-	double m_pressure = 760.0;	
+	double m_pressure = 760.0;
+	WeatherStationType m_type;
 };
