@@ -7,11 +7,17 @@
 
 using namespace std;
 
+enum class WeatherStationType
+{
+	IN, OUT
+};
+
 struct SWeatherInfo
 {
 	double temperature = 0;
 	double humidity = 0;
 	double pressure = 0;
+	WeatherStationType wdType;
 };
 
 class CDisplay: public COrderedObserver<SWeatherInfo>
@@ -138,6 +144,7 @@ protected:
 		info.temperature = GetTemperature();
 		info.humidity = GetHumidity();
 		info.pressure = GetPressure();
+		info.wdType = WeatherStationType::IN;
 		return info;
 	}
 private:
