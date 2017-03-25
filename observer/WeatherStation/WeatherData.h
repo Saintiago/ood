@@ -3,24 +3,22 @@
 #include <vector>
 #include <algorithm>
 #include <climits>
+#include <string>
 #include "Observer.h"
 
 using namespace std;
 
-enum class WeatherStationType
-{
-	IN, OUT
-};
+class CWeatherData;
 
 struct SWeatherInfo
 {
 	double temperature = 0;
 	double humidity = 0;
 	double pressure = 0;
-	WeatherStationType wdType;
+	const CWeatherData * sender;
 };
 
-class CDisplay: public COrderedObserver<SWeatherInfo>
+class CDisplay: public IObserver<SWeatherInfo>
 {
 private:
 	/* Метод Update сделан приватным, чтобы ограничить возможность его вызова напрямую
@@ -40,10 +38,10 @@ class SensorStat
 {
 public:
 	SensorStat(string name)
-		: m_name(name)
+		: m_name(move(name))
 	{}
 
-	void update(double value)
+	void Update(double value)
 	{
 		if (m_min > value)
 		{
@@ -57,11 +55,11 @@ public:
 		++m_countAcc;
 	}
 
-	void show()
+	void Show()
 	{
-		std::cout << "Max " << m_name.c_str() << " " << m_max << std::endl;
-		std::cout << "Min " << m_name.c_str() << " " << m_min << std::endl;
-		std::cout << "Average " << m_name.c_str() << " " << (m_acc / m_countAcc) << std::endl;
+		std::cout << "Max " << m_name << " " << m_max << std::endl;
+		std::cout << "Min " << m_name << " " << m_min << std::endl;
+		std::cout << "Average " << m_name << " " << (m_acc / m_countAcc) << std::endl;
 		std::cout << "----------------" << std::endl;
 	}
 
@@ -74,7 +72,7 @@ private:
 	unsigned m_countAcc = 0;
 };
 
-class CStatsDisplay : public COrderedObserver<SWeatherInfo>
+class CStatsDisplay : public IObserver<SWeatherInfo>
 {
 public:
 	CStatsDisplay()
@@ -90,13 +88,13 @@ private:
 	*/
 	void Update(SWeatherInfo const& data) override
 	{
-		m_temperatureStat.update(data.temperature);
-		m_humidityStat.update(data.humidity);
-		m_pressureStat.update(data.pressure);
+		m_temperatureStat.Update(data.temperature);
+		m_humidityStat.Update(data.humidity);
+		m_pressureStat.Update(data.pressure);
 
-		m_temperatureStat.show();
-		m_humidityStat.show();
-		m_pressureStat.show();
+		m_temperatureStat.Show();
+		m_humidityStat.Show();
+		m_pressureStat.Show();
 		
 	}
 
@@ -108,9 +106,7 @@ private:
 class CWeatherData : public CObservable<SWeatherInfo>
 {
 public:
-	CWeatherData(WeatherStationType type = WeatherStationType::OUT)
-		: m_type(type)
-	{}
+	CWeatherData() = default;
 
 	// Температура в градусах Цельсия
 	double GetTemperature()const
@@ -148,12 +144,11 @@ protected:
 		info.temperature = GetTemperature();
 		info.humidity = GetHumidity();
 		info.pressure = GetPressure();
-		info.wdType = m_type;
+		info.sender = this;
 		return info;
 	}
 private:
 	double m_temperature = 0.0;
 	double m_humidity = 0.0;	
 	double m_pressure = 760.0;
-	WeatherStationType m_type;
 };
