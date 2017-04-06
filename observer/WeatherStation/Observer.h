@@ -2,6 +2,7 @@
 
 #include <set>
 #include <map>
+#include <vector>
 #include <functional>
 
 /*
@@ -41,6 +42,8 @@ public:
 
 	void RegisterObserver(ObserverType & observer, unsigned priority = 0) override
 	{
+		ClearIdleObservers();
+
 		std::map<unsigned, std::set<ObserverType *>>::iterator it = m_observers.find(priority);
 		if (it == m_observers.end())
 		{
@@ -51,6 +54,8 @@ public:
 
 	void NotifyObservers() override
 	{
+		ClearIdleObservers();
+
 		T data = GetChangedData();
 
 		for (auto & observerSetPair : m_observers)
@@ -64,6 +69,30 @@ public:
 
 	void RemoveObserver(ObserverType & observer) override
 	{
+		m_idleObserversList.push_back(&observer);
+	}
+
+protected:
+	// Классы-наследники должны перегрузить данный метод, 
+	// в котором возвращать информацию об изменениях в объекте
+	virtual T GetChangedData()const = 0;
+
+private:
+	std::map<unsigned, std::set<ObserverType *>> m_observers;
+	std::vector<ObserverType *> m_idleObserversList = {};
+
+	void ClearIdleObservers()
+	{
+		for (auto & observer : m_idleObserversList)
+		{
+			EraseObserver(*observer);
+		}
+
+		m_idleObserversList.clear();
+	}
+
+	void EraseObserver(ObserverType & observer)
+	{
 		for (auto & observerSetPair : m_observers)
 		{
 			for (auto & obs : observerSetPair.second)
@@ -76,12 +105,4 @@ public:
 			}
 		}
 	}
-
-protected:
-	// Классы-наследники должны перегрузить данный метод, 
-	// в котором возвращать информацию об изменениях в объекте
-	virtual T GetChangedData()const = 0;
-
-private:
-	std::map<unsigned, std::set<ObserverType *>> m_observers;
 };
