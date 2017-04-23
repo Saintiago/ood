@@ -36,6 +36,10 @@ Color CUtils::StringToColor(const string & colorStr)
 {
 	if (colorStr == "black") return Color::Black;
 	if (colorStr == "red") return Color::Red;
+	if (colorStr == "green") return Color::Green;
+	if (colorStr == "blue") return Color::Blue;
+	if (colorStr == "pink") return Color::Pink;
+	if (colorStr == "yellow") return Color::Yellow;
 	throw invalid_argument("Invalid color");
 }
 
@@ -43,5 +47,9 @@ string CUtils::ColorToString(Color color)
 {
 	if (color == Color::Black) return "black";
 	if (color == Color::Red) return "red";
+	if (color == Color::Green) return "green";
+	if (color == Color::Blue) return "blue";
+	if (color == Color::Pink) return "pink";
+	if (color == Color::Yellow) return "yellow";
 	throw invalid_argument("Invalid color");
 }

@@ -7,7 +7,7 @@
 
 using namespace std;
 
-std::string CEllipse::ToString()
+std::string CEllipse::ToString() const
 {
 	stringstream ss;
 	Point c = GetCenter();
@@ -20,21 +20,21 @@ std::string CEllipse::ToString()
 	return ss.str();
 }
 
-void CEllipse::Draw(ICanvas & canvas)
+void CEllipse::Draw(ICanvas & canvas) const
 {
 	canvas.SetColor(GetColor());
 	canvas.DrawEllipse(m_center, m_horizontalRadius, m_verticalRadius);
 }
 
-Point CEllipse::GetCenter()
+Point CEllipse::GetCenter() const
 {
 	return m_center;
 }
-float CEllipse::GetHorizontalRadius()
+float CEllipse::GetHorizontalRadius() const
 {
 	return m_horizontalRadius;
 }
-float CEllipse::GetVerticalRadius()
+float CEllipse::GetVerticalRadius() const
 {
 	return m_verticalRadius;
 }

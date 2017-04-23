@@ -2,8 +2,6 @@
 #include <memory>
 #include <string>
 
-class CShape;
-
 struct ICanvas
 {
 	virtual void SetColor(const Color) = 0;

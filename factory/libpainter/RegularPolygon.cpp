@@ -10,7 +10,7 @@
 
 using namespace std;
 
-std::string CRegularPolygon::ToString()
+std::string CRegularPolygon::ToString() const
 {
 	stringstream ss;
 	Point c = GetCenter();
@@ -23,7 +23,7 @@ std::string CRegularPolygon::ToString()
 	return ss.str();
 }
 
-void CRegularPolygon::Draw(ICanvas & canvas)
+void CRegularPolygon::Draw(ICanvas & canvas) const
 {
 	canvas.SetColor(GetColor());
 	
@@ -36,15 +36,15 @@ void CRegularPolygon::Draw(ICanvas & canvas)
 	canvas.DrawLine(verticies.at(verticies.size() - 1), verticies.at(0));
 }
 
-Point CRegularPolygon::GetCenter()
+Point CRegularPolygon::GetCenter() const
 {
 	return m_center;
 }
-float CRegularPolygon::GetRadius()
+float CRegularPolygon::GetRadius() const
 {
 	return m_radius;
 }
-unsigned CRegularPolygon::GetVertexCount()
+unsigned CRegularPolygon::GetVertexCount() const
 {
 	return m_vertexCount;
 }
@@ -70,7 +70,7 @@ void CRegularPolygon::SetVertexCount(unsigned vertexCount)
 	m_vertexCount = vertexCount;
 }
 
-std::vector<Point> CRegularPolygon::GetPolygonVertieces()
+std::vector<Point> CRegularPolygon::GetPolygonVertieces() const
 {
 	vector<Point> polygonVertieces;
 	const float step = float(2 * M_PI / m_vertexCount);

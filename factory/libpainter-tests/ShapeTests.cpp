@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "../libpainter/Shape.h"
 #include "../libpainter/Rectangle.h"
+#include "../libpainter/RegularPolygon.h"
 #include "../libpainter/ICanvas.h"
 #include "../libpainter/Canvas.h"
 #include <string>
@@ -71,5 +72,12 @@ BOOST_FIXTURE_TEST_SUITE(Shape, Shape_)
 
 		rectangle->Draw(canvas);
 		BOOST_CHECK_EQUAL(canvas.m_canvas, rectangleExpectedOutput.str());
+	}
+	BOOST_AUTO_TEST_CASE(polygon_can_draw_itself)
+	{
+		CRegularPolygon polygon("black 2 2 1 3");
+		polygon.Draw(canvas);
+		string expectedOutput = "Line [3, 2], [1.5, 2.86603]\nLine [1.5, 2.86603], [1.5, 1.13397]\nLine [1.5, 1.13397], [3, 2]\n";
+		BOOST_CHECK_EQUAL(canvas.m_canvas, expectedOutput);
 	}
 BOOST_AUTO_TEST_SUITE_END()

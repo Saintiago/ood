@@ -6,11 +6,11 @@
 class CShape : IShape
 {
 public:
-	virtual std::string ToString();
-	virtual void Draw(ICanvas &);
+	virtual std::string ToString() const override = 0;
+	virtual void Draw(ICanvas &) const override = 0;
 
 	void SetColor(Color);
-	Color GetColor();
+	Color GetColor() const;
 
 	CShape();
 	virtual ~CShape();

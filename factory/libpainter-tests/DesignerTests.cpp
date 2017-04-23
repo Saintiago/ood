@@ -15,6 +15,14 @@ public:
 	{
 	}
 
+	std::string ToString() const
+	{
+		return "";
+	}
+	void Draw(ICanvas & canvas) const
+	{
+		(void)canvas;
+	}
 	string descr;
 };
 

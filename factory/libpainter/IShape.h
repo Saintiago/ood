@@ -4,7 +4,7 @@
 
 struct IShape
 {
-	virtual std::string ToString() = 0;
-	virtual void Draw(ICanvas &) = 0;
+	virtual std::string ToString() const = 0;
+	virtual void Draw(ICanvas &) const = 0;
 	virtual ~IShape() = default;
 };

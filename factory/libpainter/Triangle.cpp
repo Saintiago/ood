@@ -7,7 +7,7 @@
 
 using namespace std;
 
-std::string CTriangle::ToString()
+std::string CTriangle::ToString() const
 {
 	stringstream ss;
 	Point v1 = GetVertex1();
@@ -21,7 +21,7 @@ std::string CTriangle::ToString()
 	return ss.str();
 }
 
-void CTriangle::Draw(ICanvas & canvas)
+void CTriangle::Draw(ICanvas & canvas) const
 {
 	canvas.SetColor(GetColor());
 	canvas.DrawLine(m_vertex1, m_vertex2);
@@ -29,15 +29,15 @@ void CTriangle::Draw(ICanvas & canvas)
 	canvas.DrawLine(m_vertex3, m_vertex1);
 }
 
-Point CTriangle::GetVertex1()
+Point CTriangle::GetVertex1() const
 {
 	return m_vertex1;
 }
-Point CTriangle::GetVertex2()
+Point CTriangle::GetVertex2() const
 {
 	return m_vertex2;
 }
-Point CTriangle::GetVertex3()
+Point CTriangle::GetVertex3() const
 {
 	return m_vertex3;
 }

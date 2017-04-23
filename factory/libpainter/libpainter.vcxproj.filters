@@ -25,6 +25,9 @@
     <Filter Include="Source Files\Designer">
       <UniqueIdentifier>{d591d95e-293c-4bc6-8cd5-30add364bdd4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Painter">
+      <UniqueIdentifier>{2f95a137-f7d8-4e64-89a8-c91a39e60d77}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -78,6 +81,15 @@
     <ClInclude Include="RegularPolygon.h">
       <Filter>Source Files\Shapes</Filter>
     </ClInclude>
+    <ClInclude Include="IPainter.h">
+      <Filter>Source Files\Painter</Filter>
+    </ClInclude>
+    <ClInclude Include="Painter.h">
+      <Filter>Source Files\Painter</Filter>
+    </ClInclude>
+    <ClInclude Include="SvgCanvas.h">
+      <Filter>Source Files\Canvas</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -112,6 +124,12 @@
     </ClCompile>
     <ClCompile Include="RegularPolygon.cpp">
       <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Painter.cpp">
+      <Filter>Source Files\Painter</Filter>
+    </ClCompile>
+    <ClCompile Include="SvgCanvas.cpp">
+      <Filter>Source Files\Canvas</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

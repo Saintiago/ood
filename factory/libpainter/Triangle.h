@@ -9,12 +9,12 @@ public:
 	CTriangle(const std::string & description);
 	~CTriangle();
 
-	Point GetVertex1();
-	Point GetVertex2();
-	Point GetVertex3();
+	Point GetVertex1() const;
+	Point GetVertex2() const;
+	Point GetVertex3() const;
 
-	virtual std::string ToString() override;
-	virtual void Draw(ICanvas &) override;
+	virtual std::string ToString() const override;
+	virtual void Draw(ICanvas &) const override;
 
 private:
 	void SetVertex1(Point);

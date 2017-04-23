@@ -35,4 +35,8 @@ BOOST_FIXTURE_TEST_SUITE(ShapeFactory, ShapeFactory_)
 		string polygonExpectedOutput = "polygon black 1 1 1 4";
 		BOOST_CHECK_EQUAL(polygon->ToString(), polygonExpectedOutput);
 	}
+	BOOST_AUTO_TEST_CASE(will_throw_invalid_argument_eception_if_incorrect_input_provided)
+	{
+		BOOST_CHECK_THROW(factory.CreateShape("some incorrect input"), invalid_argument);
+	}
 BOOST_AUTO_TEST_SUITE_END()

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "../libpainter/PictureDraft.h"
-#include "../libpainter/Shape.h"
+#include "../libpainter/Rectangle.h"
 
 using namespace std;
 struct Picture_draft_
@@ -22,11 +22,11 @@ BOOST_FIXTURE_TEST_SUITE(Picture_draft, Picture_draft_)
 
 	struct after_adding_a_shape_ : Picture_draft_
 	{
-		unique_ptr<CShape> shape1 = make_unique<CShape>();
+		unique_ptr<CShape> shape1 = make_unique<CRectangle>("black 0 0 1 1");
 		CShape & refShape1 = *shape1;
-		unique_ptr<CShape> shape2 = make_unique<CShape>();
+		unique_ptr<CShape> shape2 = make_unique<CRectangle>("black 0 0 1 1");
 		CShape & refShape2 = *shape2;
-		unique_ptr<CShape> shape3 = make_unique<CShape>();
+		unique_ptr<CShape> shape3 = make_unique<CRectangle>("black 0 0 1 1");
 		CShape & refShape3 = *shape3;
 
 		after_adding_a_shape_()

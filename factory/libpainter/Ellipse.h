@@ -9,12 +9,12 @@ public:
 	CEllipse(const std::string & description);
 	~CEllipse();
 
-	Point GetCenter();
-	float GetHorizontalRadius();
-	float GetVerticalRadius();
+	Point GetCenter() const;
+	float GetHorizontalRadius() const;
+	float GetVerticalRadius() const;
 
-	virtual std::string ToString() override;
-	virtual void Draw(ICanvas &) override;
+	virtual std::string ToString() const override;
+	virtual void Draw(ICanvas &) const override;
 
 private:
 	void SetCenter(Point);

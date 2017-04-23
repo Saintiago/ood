@@ -7,7 +7,7 @@
 
 using namespace std;
 
-std::string CRectangle::ToString()
+std::string CRectangle::ToString() const
 {
 	stringstream ss;
 	Point lt = GetLeftTop();
@@ -17,7 +17,7 @@ std::string CRectangle::ToString()
 	return ss.str();
 }
 
-void CRectangle::Draw(ICanvas & canvas)
+void CRectangle::Draw(ICanvas & canvas) const
 {
 	Point p1 = m_leftTop;
 	Point p2 = { m_rightBottom.first, m_leftTop.second };
@@ -31,12 +31,12 @@ void CRectangle::Draw(ICanvas & canvas)
 	canvas.DrawLine(p4, p1);
 }
 
-Point CRectangle::GetLeftTop()
+Point CRectangle::GetLeftTop() const
 {
 	return m_leftTop;
 }
 
-Point CRectangle::GetRightBottom()
+Point CRectangle::GetRightBottom() const
 {
 	return m_rightBottom;
 }

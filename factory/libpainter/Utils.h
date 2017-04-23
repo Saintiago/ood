@@ -4,10 +4,15 @@
 
 using Params = std::vector<std::string>;
 using Point = std::pair<float, float>;
+
 enum class Color
 {
 	Black,
-	Red
+	Red,
+	Green,
+	Blue,
+	Pink,
+	Yellow
 };
 
 class CUtils

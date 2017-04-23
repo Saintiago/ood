@@ -9,12 +9,12 @@ public:
 	CRectangle(const std::string & description);
 	~CRectangle();
 
-	virtual std::string ToString() override;
-	virtual void Draw(ICanvas &) override;
+	virtual std::string ToString() const override;
+	virtual void Draw(ICanvas &) const override;
 
 private:
-	Point GetLeftTop();
-	Point GetRightBottom();
+	Point GetLeftTop() const;
+	Point GetRightBottom() const;
 
 	void SetLeftTop(Point);
 	void SetRightBottom(Point);

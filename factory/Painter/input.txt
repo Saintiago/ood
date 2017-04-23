@@ -1,0 +1,4 @@
+ellipse red 50 50 20 20
+triangle green 50 70 70 100 30 100
+rectangle pink 30 100 40 150
+rectangle yellow 60 100 70 140

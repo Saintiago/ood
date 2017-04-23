@@ -4,13 +4,11 @@
 #include <boost/iterator/indirect_iterator.hpp>
 #include "Shape.h"
 
-
-
 class CPictureDraft
 {
 
 public:
-	typedef std::vector<std::unique_ptr<CShape>> Storage;
+	typedef std::vector<ShapePtr> Storage;
 
 
 	CPictureDraft();
@@ -23,7 +21,7 @@ public:
 
 	ConstIterator end()const;
 
-	void AddShape(std::unique_ptr<CShape> && shape);
+	void AddShape(ShapePtr && shape);
 
 	CPictureDraft(CPictureDraft &&) = default;
 	CPictureDraft& operator=(CPictureDraft &&) = default;
