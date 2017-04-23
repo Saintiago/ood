@@ -69,6 +69,15 @@
     <ClInclude Include="Utils.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Ellipse.h">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="RegularPolygon.h">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -94,6 +103,15 @@
     </ClCompile>
     <ClCompile Include="Utils.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellipse.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="RegularPolygon.cpp">
+      <Filter>Source Files\Shapes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

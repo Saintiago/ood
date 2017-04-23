@@ -3,7 +3,7 @@
 #include <string>
 
 using Params = std::vector<std::string>;
-using Point = std::pair<int, int>;
+using Point = std::pair<float, float>;
 enum class Color
 {
 	Black,

@@ -31,12 +31,11 @@ public:
 		m_canvas += ss.str();
 	}
 
-	void DrawEllipse(const Point &  left, const Point &  top, int width, int height) override
+	void DrawEllipse(const Point &  center, float width, float height)
 	{
 		stringstream ss;
-		ss << "Ellipse " 
-			<< "[" << left.first << ", " << left.second << "], "
-			<< "[" << top.first << ", " << top.second << "], "
+		ss << "Ellipse "
+			<< "[" << center.first << ", " << center.second << "], "
 			<< "width: " << width << ", height: " << height
 			<< endl;
 		m_canvas += ss.str();

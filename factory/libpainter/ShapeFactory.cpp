@@ -2,6 +2,9 @@
 #include "stdafx.h"
 #include "ShapeFactory.h"
 #include "Rectangle.h"
+#include "Triangle.h"
+#include "Ellipse.h"
+#include "RegularPolygon.h"
 #include <memory>
 #include <string>
 
@@ -20,11 +23,23 @@ ShapePtr CShapeFactory::CreateShape(const std::string & description)
 {
 	Params params = CUtils::ExplodeViaSpace(description);
 	string shapeType = params[0];
-	
+	string shapeDescription = CUtils::ImplodeWithoutFirstElement(params);
+
 	if (shapeType == "rectangle")
 	{
-		string shapeDescription = CUtils::ImplodeWithoutFirstElement(params);
 		return make_unique<CRectangle>(shapeDescription);
+	}
+	if (shapeType == "triangle")
+	{
+		return make_unique<CTriangle>(shapeDescription);
+	}
+	if (shapeType == "ellipse")
+	{
+		return make_unique<CEllipse>(shapeDescription);
+	}
+	if (shapeType == "polygon")
+	{
+		return make_unique<CRegularPolygon>(shapeDescription);
 	}
 
 	throw invalid_argument("Unknown shape type");

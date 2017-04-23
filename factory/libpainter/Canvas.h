@@ -10,7 +10,7 @@ public:
 
 	void SetColor(const Color color) override;
 	void DrawLine(const Point & from, const Point &  to) override;
-	void DrawEllipse(const Point &  left, const Point &  top, int width, int height) override;
+	void DrawEllipse(const Point &  center, float width, float height) override;
 
 private:
 	Color m_currentColor;

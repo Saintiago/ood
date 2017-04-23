@@ -24,6 +24,7 @@ void CRectangle::Draw(ICanvas & canvas)
 	Point p3 = m_rightBottom;
 	Point p4 = { m_leftTop.first, m_rightBottom.second };
 
+	canvas.SetColor(GetColor());
 	canvas.DrawLine(p1, p2);
 	canvas.DrawLine(p2, p3);
 	canvas.DrawLine(p3, p4);
@@ -55,8 +56,8 @@ CRectangle::CRectangle(const std::string & description)
 	Params params = CUtils::ExplodeViaSpace(description);
 
 	SetColor(CUtils::StringToColor(params.at(0)));
-	SetLeftTop({ stoi(params.at(1)), stoi(params.at(2)) });
-	SetRightBottom({ stoi(params.at(3)), stoi(params.at(4)) });
+	SetLeftTop({ stof(params.at(1)), stof(params.at(2)) });
+	SetRightBottom({ stof(params.at(3)), stof(params.at(4)) });
 }
 
 

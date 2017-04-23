@@ -141,22 +141,27 @@
     <ClInclude Include="..\libpainter-tests\stdafx.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="Designer.h" />
+    <ClInclude Include="Ellipse.h" />
     <ClInclude Include="ICanvas.h" />
     <ClInclude Include="IShape.h" />
     <ClInclude Include="IShapeFactory.h" />
     <ClInclude Include="PictureDraft.h" />
     <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="RegularPolygon.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="ShapeFactory.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Triangle.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Designer.cpp" />
+    <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="PictureDraft.cpp" />
     <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="RegularPolygon.cpp" />
     <ClCompile Include="Shape.cpp" />
     <ClCompile Include="ShapeFactory.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -165,6 +170,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

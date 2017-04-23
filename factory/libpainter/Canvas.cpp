@@ -30,12 +30,11 @@ void CCanvas::DrawLine(const Point & from, const Point &  to)
 	m_canvas += ss.str();
 }
 
-void CCanvas::DrawEllipse(const Point &  left, const Point &  top, int width, int height)
+void CCanvas::DrawEllipse(const Point &  center, float width, float height)
 {
 	stringstream ss;
 	ss << "Ellipse "
-		<< "[" << left.first << ", " << left.second << "], "
-		<< "[" << top.first << ", " << top.second << "], "
+		<< "[" << center.first << ", " << center.second << "], "
 		<< "width: " << width << ", height: " << height
 		<< endl;
 	m_canvas += ss.str();
