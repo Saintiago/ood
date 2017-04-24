@@ -44,14 +44,17 @@ Point CTriangle::GetVertex3() const
 
 void CTriangle::SetVertex1(Point vertex)
 {
+	CUtils::CheckPoint(vertex);
 	m_vertex1 = vertex;
 }
 void CTriangle::SetVertex2(Point vertex)
 {
+	CUtils::CheckPoint(vertex);
 	m_vertex2 = vertex;
 }
 void CTriangle::SetVertex3(Point vertex)
 {
+	CUtils::CheckPoint(vertex);
 	m_vertex3 = vertex;
 }
 

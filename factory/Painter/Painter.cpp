@@ -7,22 +7,31 @@
 #include "../libpainter/Designer.h"
 #include "../libpainter/ShapeFactory.h"
 #include "../libpainter/PictureDraft.h"
+#include <iostream>
 
 using namespace std;
 
 int main()
 {
-	CSvgCanvas canvas;
-	CPainter painter;
-	CPictureDraft draft;
+	try
+	{
+		CSvgCanvas canvas;
+		CPainter painter;
+		CPictureDraft draft;
 
-	CShapeFactory factory;
-	CDesigner designer(factory);
+		CShapeFactory factory;
+		CDesigner designer(factory);
 
-	fstream canvasFile("input.txt");
-	draft = designer.CreateDraft(canvasFile);
+		fstream canvasFile("input.txt");
+		draft = designer.CreateDraft(canvasFile);
 
-	painter.DrawPicture(draft, canvas);
+		painter.DrawPicture(draft, canvas);
+	}
+	catch (const exception & e)
+	{
+		cerr << e.what() << endl;
+		return 1;
+	}
 
 	return 0;
 }

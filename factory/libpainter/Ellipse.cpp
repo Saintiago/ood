@@ -41,22 +41,17 @@ float CEllipse::GetVerticalRadius() const
 
 void CEllipse::SetCenter(Point point)
 {
+	CUtils::CheckPoint(point);
 	m_center = point;
 }
 void CEllipse::SetHorizontalRadius(float width)
 {
-	if (width == 0)
-	{
-		throw invalid_argument("Horizontal radius must be bigger than 0");
-	}
+	CUtils::CheckFloat(width);
 	m_horizontalRadius = width;
 }
 void CEllipse::SetVerticalRadius(float height)
 {
-	if (height == 0)
-	{
-		throw invalid_argument("Vertical radius must be bigger than 0");
-	}
+	CUtils::CheckFloat(height);
 	m_verticalRadius = height;
 }
 

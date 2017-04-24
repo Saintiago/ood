@@ -51,14 +51,12 @@ unsigned CRegularPolygon::GetVertexCount() const
 
 void CRegularPolygon::SetCenter(Point point)
 {
+	CUtils::CheckPoint(point);
 	m_center = point;
 }
 void CRegularPolygon::SetRadius(float radius)
 {
-	if (radius == 0)
-	{
-		throw invalid_argument("Radius must be bigger than 0");
-	}
+	CUtils::CheckFloat(radius);
 	m_radius = radius;
 }
 void CRegularPolygon::SetVertexCount(unsigned vertexCount)

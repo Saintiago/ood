@@ -53,3 +53,18 @@ string CUtils::ColorToString(Color color)
 	if (color == Color::Yellow) return "yellow";
 	throw invalid_argument("Invalid color");
 }
+
+void CUtils::CheckPoint(Point point)
+{
+	CUtils::CheckFloat(point.first);
+	CUtils::CheckFloat(point.second);
+
+}
+
+void CUtils::CheckFloat(float fl)
+{
+	if (fl < 0)
+	{
+		throw invalid_argument("Params must not be lesser than zero");
+	}
+}

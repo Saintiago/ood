@@ -24,6 +24,8 @@ public:
 	static Params ExplodeViaSpace(const std::string & description);
 	static Color StringToColor(const std::string & colorStr);
 	static std::string ColorToString(Color color);
+	static void CUtils::CheckPoint(Point point);
+	static void CUtils::CheckFloat(float fl);
 
 private:
 	CUtils() = default;

@@ -43,11 +43,13 @@ Point CRectangle::GetRightBottom() const
 
 void CRectangle::SetLeftTop(Point leftTop)
 {
+	CUtils::CheckPoint(leftTop);
 	m_leftTop = leftTop;
 }
 
 void CRectangle::SetRightBottom(Point rightBottom)
 {
+	CUtils::CheckPoint(rightBottom);
 	m_rightBottom = rightBottom;
 }
 
