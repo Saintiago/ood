@@ -9,6 +9,7 @@
 
 
 using namespace std;
+using namespace utils;
 
 std::string CRegularPolygon::ToString() const
 {
@@ -16,7 +17,7 @@ std::string CRegularPolygon::ToString() const
 	Point c = GetCenter();
 	float radius = GetRadius();
 	unsigned vertiecesCount = GetVertexCount();
-	string color = CUtils::ColorToString(GetColor());
+	string color = ColorToString(GetColor());
 	ss << "polygon " << color << " "
 		<< c.first << " " << c.second << " "
 		<< radius << " " << vertiecesCount;
@@ -51,12 +52,12 @@ unsigned CRegularPolygon::GetVertexCount() const
 
 void CRegularPolygon::SetCenter(Point point)
 {
-	CUtils::CheckPoint(point);
+	CheckPoint(point);
 	m_center = point;
 }
 void CRegularPolygon::SetRadius(float radius)
 {
-	CUtils::CheckFloat(radius);
+	CheckFloat(radius);
 	m_radius = radius;
 }
 void CRegularPolygon::SetVertexCount(unsigned vertexCount)
@@ -83,9 +84,9 @@ std::vector<Point> CRegularPolygon::GetPolygonVertieces() const
 
 CRegularPolygon::CRegularPolygon(const std::string & description)
 {
-	Params params = CUtils::ExplodeViaSpace(description);
+	Params params = ExplodeViaSpace(description);
 
-	SetColor(CUtils::StringToColor(params.at(0)));
+	SetColor(StringToColor(params.at(0)));
 	SetCenter({ stof(params.at(1)), stof(params.at(2)) });
 	SetRadius(stof(params.at(3)));
 	SetVertexCount(stoi(params.at(4)));

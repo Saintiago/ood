@@ -15,20 +15,14 @@ enum class Color
 	Yellow
 };
 
-class CUtils
+namespace utils
 {
-public:
-
-	static std::string ImplodeViaSpace(Params params);
-	static std::string ImplodeWithoutFirstElement(Params params);
-	static Params ExplodeViaSpace(const std::string & description);
-	static Color StringToColor(const std::string & colorStr);
-	static std::string ColorToString(Color color);
-	static void CUtils::CheckPoint(Point point);
-	static void CUtils::CheckFloat(float fl);
-
-private:
-	CUtils() = default;
-
-};
+	std::string ImplodeViaSpace(Params params);
+	std::string ImplodeWithoutFirstElement(Params params);
+	Params ExplodeViaSpace(const std::string & description);
+	Color StringToColor(const std::string & colorStr);
+	std::string ColorToString(Color color);
+	void CheckPoint(Point point);
+	void CheckFloat(float fl);
+}
 

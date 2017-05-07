@@ -6,6 +6,7 @@
 #include <sstream>
 
 using namespace std;
+using namespace utils;
 
 std::string CEllipse::ToString() const
 {
@@ -13,7 +14,7 @@ std::string CEllipse::ToString() const
 	Point c = GetCenter();
 	float hr = GetHorizontalRadius();
 	float vr = GetVerticalRadius();
-	string color = CUtils::ColorToString(GetColor());
+	string color = ColorToString(GetColor());
 	ss << "ellipse " << color << " "
 		<< c.first << " " << c.second << " "
 		<< hr << " " << vr;
@@ -41,25 +42,25 @@ float CEllipse::GetVerticalRadius() const
 
 void CEllipse::SetCenter(Point point)
 {
-	CUtils::CheckPoint(point);
+	CheckPoint(point);
 	m_center = point;
 }
 void CEllipse::SetHorizontalRadius(float width)
 {
-	CUtils::CheckFloat(width);
+	CheckFloat(width);
 	m_horizontalRadius = width;
 }
 void CEllipse::SetVerticalRadius(float height)
 {
-	CUtils::CheckFloat(height);
+	CheckFloat(height);
 	m_verticalRadius = height;
 }
 
 CEllipse::CEllipse(const std::string & description)
 {
-	Params params = CUtils::ExplodeViaSpace(description);
+	Params params = ExplodeViaSpace(description);
 
-	SetColor(CUtils::StringToColor(params.at(0)));
+	SetColor(StringToColor(params.at(0)));
 	SetCenter({ stof(params.at(1)), stof(params.at(2)) });
 	SetHorizontalRadius(stof(params.at(3)));
 	SetVerticalRadius(stof(params.at(4)));

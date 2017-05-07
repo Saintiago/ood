@@ -9,6 +9,7 @@
 #include <string>
 
 using namespace std;
+using namespace utils;
 
 CShapeFactory::CShapeFactory()
 {
@@ -21,9 +22,9 @@ CShapeFactory::~CShapeFactory()
 
 ShapePtr CShapeFactory::CreateShape(const std::string & description)
 {
-	Params params = CUtils::ExplodeViaSpace(description);
+	Params params = ExplodeViaSpace(description);
 	string shapeType = params[0];
-	string shapeDescription = CUtils::ImplodeWithoutFirstElement(params);
+	string shapeDescription = ImplodeWithoutFirstElement(params);
 
 	if (shapeType == "rectangle")
 	{

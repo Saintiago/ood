@@ -6,6 +6,7 @@
 #include <sstream>
 
 using namespace std;
+using namespace utils;
 
 std::string CTriangle::ToString() const
 {
@@ -13,7 +14,7 @@ std::string CTriangle::ToString() const
 	Point v1 = GetVertex1();
 	Point v2 = GetVertex2();
 	Point v3 = GetVertex3();
-	string color = CUtils::ColorToString(GetColor());
+	string color = ColorToString(GetColor());
 	ss << "triangle " << color << " "
 		<< v1.first << " " << v1.second << " "
 		<< v2.first << " " << v2.second << " "
@@ -44,25 +45,25 @@ Point CTriangle::GetVertex3() const
 
 void CTriangle::SetVertex1(Point vertex)
 {
-	CUtils::CheckPoint(vertex);
+	CheckPoint(vertex);
 	m_vertex1 = vertex;
 }
 void CTriangle::SetVertex2(Point vertex)
 {
-	CUtils::CheckPoint(vertex);
+	CheckPoint(vertex);
 	m_vertex2 = vertex;
 }
 void CTriangle::SetVertex3(Point vertex)
 {
-	CUtils::CheckPoint(vertex);
+	CheckPoint(vertex);
 	m_vertex3 = vertex;
 }
 
 CTriangle::CTriangle(const std::string & description)
 {
-	Params params = CUtils::ExplodeViaSpace(description);
+	Params params = ExplodeViaSpace(description);
 
-	SetColor(CUtils::StringToColor(params.at(0)));
+	SetColor(StringToColor(params.at(0)));
 	SetVertex1({ stof(params.at(1)), stof(params.at(2)) });
 	SetVertex2({ stof(params.at(3)), stof(params.at(4)) });
 	SetVertex3({ stof(params.at(5)), stof(params.at(6)) });

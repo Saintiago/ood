@@ -6,13 +6,14 @@
 #include <sstream>
 
 using namespace std;
+using namespace utils;
 
 std::string CRectangle::ToString() const
 {
 	stringstream ss;
 	Point lt = GetLeftTop();
 	Point rb = GetRightBottom();
-	string color = CUtils::ColorToString(GetColor());
+	string color = ColorToString(GetColor());
 	ss << "rectangle " << color << " " << lt.first << " " << lt.second << " " << rb.first << " " << rb.second;
 	return ss.str();
 }
@@ -43,21 +44,21 @@ Point CRectangle::GetRightBottom() const
 
 void CRectangle::SetLeftTop(Point leftTop)
 {
-	CUtils::CheckPoint(leftTop);
+	CheckPoint(leftTop);
 	m_leftTop = leftTop;
 }
 
 void CRectangle::SetRightBottom(Point rightBottom)
 {
-	CUtils::CheckPoint(rightBottom);
+	CheckPoint(rightBottom);
 	m_rightBottom = rightBottom;
 }
 
 CRectangle::CRectangle(const std::string & description)
 {
-	Params params = CUtils::ExplodeViaSpace(description);
+	Params params = ExplodeViaSpace(description);
 
-	SetColor(CUtils::StringToColor(params.at(0)));
+	SetColor(StringToColor(params.at(0)));
 	SetLeftTop({ stof(params.at(1)), stof(params.at(2)) });
 	SetRightBottom({ stof(params.at(3)), stof(params.at(4)) });
 }
