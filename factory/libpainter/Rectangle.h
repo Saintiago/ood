@@ -6,7 +6,7 @@ class CRectangle :
 	public CShape
 {
 public:
-	CRectangle(const std::string & description);
+	CRectangle(Color, Point, Point);
 	~CRectangle();
 
 	virtual std::string ToString() const override;

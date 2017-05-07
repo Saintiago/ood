@@ -6,7 +6,7 @@ class CRegularPolygon :
 	public CShape
 {
 public:
-	CRegularPolygon(const std::string & description);
+	CRegularPolygon(Color, Point, float, int);
 	~CRegularPolygon();
 
 	Point GetCenter() const;

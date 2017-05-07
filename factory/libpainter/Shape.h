@@ -12,7 +12,7 @@ public:
 	void SetColor(Color);
 	Color GetColor() const;
 
-	CShape();
+	CShape(Color);
 	virtual ~CShape();
 
 private:

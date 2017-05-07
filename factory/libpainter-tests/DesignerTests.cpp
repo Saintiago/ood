@@ -11,7 +11,8 @@ class CMockShape : public CShape
 {
 public:
 	CMockShape(const string& descr)
-		:descr(descr)
+		: descr(descr)
+		, CShape(Color::Black)
 	{
 	}
 

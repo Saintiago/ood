@@ -22,11 +22,14 @@ BOOST_FIXTURE_TEST_SUITE(Picture_draft, Picture_draft_)
 
 	struct after_adding_a_shape_ : Picture_draft_
 	{
-		unique_ptr<CShape> shape1 = make_unique<CRectangle>("black 0 0 1 1");
+		Color color = Color::Black;
+		Point leftTop = { (float)0, (float)0 };
+		Point rightBottom = { (float)1, (float)1 };
+		unique_ptr<CShape> shape1 = make_unique<CRectangle>(color, leftTop, rightBottom);
 		CShape & refShape1 = *shape1;
-		unique_ptr<CShape> shape2 = make_unique<CRectangle>("black 0 0 1 1");
+		unique_ptr<CShape> shape2 = make_unique<CRectangle>(color, leftTop, rightBottom);
 		CShape & refShape2 = *shape2;
-		unique_ptr<CShape> shape3 = make_unique<CRectangle>("black 0 0 1 1");
+		unique_ptr<CShape> shape3 = make_unique<CRectangle>(color, leftTop, rightBottom);
 		CShape & refShape3 = *shape3;
 
 		after_adding_a_shape_()

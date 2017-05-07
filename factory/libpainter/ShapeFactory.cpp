@@ -24,23 +24,37 @@ ShapePtr CShapeFactory::CreateShape(const std::string & description)
 {
 	Params params = ExplodeViaSpace(description);
 	string shapeType = params[0];
-	string shapeDescription = ImplodeWithoutFirstElement(params);
 
 	if (shapeType == "rectangle")
 	{
-		return make_unique<CRectangle>(shapeDescription);
+		Color color = StringToColor(params[1]);
+		Point leftTop = { stof(params.at(2)), stof(params.at(3)) };
+		Point rightBottom = { stof(params.at(4)), stof(params.at(5)) };
+		return make_unique<CRectangle>(color, leftTop, rightBottom);
 	}
 	if (shapeType == "triangle")
 	{
-		return make_unique<CTriangle>(shapeDescription);
+		Color color = StringToColor(params[1]);
+		Point vertex1 = { stof(params.at(2)), stof(params.at(3)) };
+		Point vertex2 = { stof(params.at(4)), stof(params.at(5)) };
+		Point vertex3 = { stof(params.at(6)), stof(params.at(7)) };
+		return make_unique<CTriangle>(color, vertex1, vertex2, vertex3);
 	}
 	if (shapeType == "ellipse")
 	{
-		return make_unique<CEllipse>(shapeDescription);
+		Color color = StringToColor(params[1]);
+		Point center = { stof(params.at(2)), stof(params.at(3)) };
+		float horizontalRadius = stof(params.at(4));
+		float verticalRadius = stof(params.at(5));
+		return make_unique<CEllipse>(color, center, horizontalRadius, verticalRadius);
 	}
 	if (shapeType == "polygon")
 	{
-		return make_unique<CRegularPolygon>(shapeDescription);
+		Color color = StringToColor(params[1]);
+		Point center = { stof(params.at(2)), stof(params.at(3)) };
+		float radius = stof(params.at(4));
+		int vertexCount = stoi(params.at(5));
+		return make_unique<CRegularPolygon>(color, center, radius, vertexCount);
 	}
 
 	throw invalid_argument("Unknown shape type");

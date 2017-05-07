@@ -82,14 +82,12 @@ std::vector<Point> CRegularPolygon::GetPolygonVertieces() const
 	return polygonVertieces;
 }
 
-CRegularPolygon::CRegularPolygon(const std::string & description)
+CRegularPolygon::CRegularPolygon(Color color, Point center, float radius, int vertexCount)
+	: CShape(color)
+	, m_center(center)
+	, m_radius(radius)
+	, m_vertexCount(vertexCount)
 {
-	Params params = ExplodeViaSpace(description);
-
-	SetColor(StringToColor(params.at(0)));
-	SetCenter({ stof(params.at(1)), stof(params.at(2)) });
-	SetRadius(stof(params.at(3)));
-	SetVertexCount(stoi(params.at(4)));
 }
 
 

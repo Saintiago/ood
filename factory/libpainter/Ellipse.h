@@ -6,7 +6,7 @@ class CEllipse :
 	public CShape
 {
 public:
-	CEllipse(const std::string & description);
+	CEllipse(Color, Point, float, float);
 	~CEllipse();
 
 	Point GetCenter() const;

@@ -56,14 +56,12 @@ void CEllipse::SetVerticalRadius(float height)
 	m_verticalRadius = height;
 }
 
-CEllipse::CEllipse(const std::string & description)
+CEllipse::CEllipse(Color color, Point center, float horizontalRadius, float verticalRadius)
+	: CShape(color)
+	, m_center(center)
+	, m_horizontalRadius(horizontalRadius)
+	, m_verticalRadius(verticalRadius)
 {
-	Params params = ExplodeViaSpace(description);
-
-	SetColor(StringToColor(params.at(0)));
-	SetCenter({ stof(params.at(1)), stof(params.at(2)) });
-	SetHorizontalRadius(stof(params.at(3)));
-	SetVerticalRadius(stof(params.at(4)));
 }
 
 

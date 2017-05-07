@@ -6,7 +6,7 @@ class CTriangle :
 	public CShape
 {
 public:
-	CTriangle(const std::string & description);
+	CTriangle(Color, Point, Point, Point);
 	~CTriangle();
 
 	Point GetVertex1() const;

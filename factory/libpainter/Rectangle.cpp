@@ -54,13 +54,12 @@ void CRectangle::SetRightBottom(Point rightBottom)
 	m_rightBottom = rightBottom;
 }
 
-CRectangle::CRectangle(const std::string & description)
+CRectangle::CRectangle(Color color, Point leftTop, Point rightBottom)
+	: CShape(color)
+	, m_leftTop(leftTop)
+	, m_rightBottom(rightBottom)
+	
 {
-	Params params = ExplodeViaSpace(description);
-
-	SetColor(StringToColor(params.at(0)));
-	SetLeftTop({ stof(params.at(1)), stof(params.at(2)) });
-	SetRightBottom({ stof(params.at(3)), stof(params.at(4)) });
 }
 
 

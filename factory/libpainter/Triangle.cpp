@@ -59,14 +59,12 @@ void CTriangle::SetVertex3(Point vertex)
 	m_vertex3 = vertex;
 }
 
-CTriangle::CTriangle(const std::string & description)
+CTriangle::CTriangle(Color color, Point vertex1, Point vertex2, Point vertex3)
+	: CShape(color)
+	, m_vertex1(vertex1)
+	, m_vertex2(vertex2)
+	, m_vertex3(vertex3)
 {
-	Params params = ExplodeViaSpace(description);
-
-	SetColor(StringToColor(params.at(0)));
-	SetVertex1({ stof(params.at(1)), stof(params.at(2)) });
-	SetVertex2({ stof(params.at(3)), stof(params.at(4)) });
-	SetVertex3({ stof(params.at(5)), stof(params.at(6)) });
 }
 
 
