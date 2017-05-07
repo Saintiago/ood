@@ -16,11 +16,11 @@ std::string CRegularPolygon::ToString() const
 	stringstream ss;
 	Point c = GetCenter();
 	float radius = GetRadius();
-	unsigned vertiecesCount = GetVertexCount();
+	unsigned verticesCount = GetVertexCount();
 	string color = ColorToString(GetColor());
 	ss << "polygon " << color << " "
 		<< c.first << " " << c.second << " "
-		<< radius << " " << vertiecesCount;
+		<< radius << " " << verticesCount;
 	return ss.str();
 }
 
@@ -28,7 +28,7 @@ void CRegularPolygon::Draw(ICanvas & canvas) const
 {
 	canvas.SetColor(GetColor());
 	
-	vector<Point> verticies = GetPolygonVertieces();
+	vector<Point> verticies = GetPolygonvertices();
 
 	for (unsigned i = 0; i < (verticies.size() - 1); ++i)
 	{
@@ -69,17 +69,17 @@ void CRegularPolygon::SetVertexCount(unsigned vertexCount)
 	m_vertexCount = vertexCount;
 }
 
-std::vector<Point> CRegularPolygon::GetPolygonVertieces() const
+std::vector<Point> CRegularPolygon::GetPolygonvertices() const
 {
-	vector<Point> polygonVertieces;
+	vector<Point> polygonvertices;
 	const float step = float(2 * M_PI / m_vertexCount);
 	for (float angle = 0; angle < float(2 * M_PI); angle += step)
 	{
 		const float dx = m_radius * cosf(angle);
 		const float dy = m_radius * sinf(angle);
-		polygonVertieces.push_back({ dx + m_center.first, dy + m_center.second });
+		polygonvertices.push_back({ dx + m_center.first, dy + m_center.second });
 	}
-	return polygonVertieces;
+	return polygonvertices;
 }
 
 CRegularPolygon::CRegularPolygon(Color color, Point center, float radius, int vertexCount)

@@ -21,7 +21,7 @@ private:
 	void SetRadius(float);
 	void SetVertexCount(unsigned);
 
-	std::vector<Point> GetPolygonVertieces() const;
+	std::vector<Point> GetPolygonvertices() const;
 
 	Point m_center;
 	float m_radius;
