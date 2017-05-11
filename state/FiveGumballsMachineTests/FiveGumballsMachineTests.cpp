@@ -34,6 +34,71 @@ Machine is %5%
 
 // Непустой автомат с пятью монетками
 BOOST_FIXTURE_TEST_SUITE(FiveGumballsMachine, FiveGumballsMachine_)
+	
+	// в состоянии HasQuarterState
+	struct in_has_quarter_state_ : FiveGumballsMachine_
+	{
+		in_has_quarter_state_()
+			: FiveGumballsMachine_()
+		{
+			machine.InsertQuarter();
+		}
+	};
+
+	BOOST_FIXTURE_TEST_SUITE(in_has_quarter_state, in_has_quarter_state_)
+
+		// можем наполнить шариками
+		BOOST_AUTO_TEST_CASE(can_be_refilled)
+		{
+			machine.Refill(10);
+			string expectedGumballMachineString = (fmt % 10 % "s" % 1 % "" % "waiting for turn of crank").str();
+			BOOST_CHECK_EQUAL(machine.ToString(), expectedGumballMachineString);
+		}
+
+	BOOST_AUTO_TEST_SUITE_END()
+
+	// в состоянии NoQuarterState
+	struct in_no_quarter_state_ : FiveGumballsMachine_
+	{
+		in_no_quarter_state_()
+			: FiveGumballsMachine_()
+		{
+		}
+	};
+
+	BOOST_FIXTURE_TEST_SUITE(in_no_quarter_state, in_no_quarter_state_)
+
+		// можем наполнить шариками
+		BOOST_AUTO_TEST_CASE(can_be_refilled)
+		{
+			machine.Refill(10);
+			string expectedGumballMachineString = (fmt % 10 % "s" % 0 % "s" % "waiting for quarter").str();
+			BOOST_CHECK_EQUAL(machine.ToString(), expectedGumballMachineString);
+		}
+
+	BOOST_AUTO_TEST_SUITE_END()
+
+	// в состоянии SoldOutState
+	struct in_sold_out_state_ : FiveGumballsMachine_
+	{
+		CFiveGumballsMachine soldOutMachine;
+		in_sold_out_state_()
+			: FiveGumballsMachine_()
+			, soldOutMachine(0)
+		{}
+	};
+
+	BOOST_FIXTURE_TEST_SUITE(in_sold_out_state, in_sold_out_state_)
+
+		// можем наполнить шариками
+		BOOST_AUTO_TEST_CASE(can_be_refilled)
+		{
+			soldOutMachine.Refill(10);
+			string expectedGumballMachineString = (fmt % 10 % "s" % 0 % "s" % "waiting for quarter").str();
+			BOOST_CHECK_EQUAL(soldOutMachine.ToString(), expectedGumballMachineString);
+		}
+
+	BOOST_AUTO_TEST_SUITE_END()
 
 	// по умолчанию находится в состоянии ожидания монетки
 	BOOST_AUTO_TEST_CASE(is_in_no_quarter_state)

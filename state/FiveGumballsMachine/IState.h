@@ -7,6 +7,7 @@ struct IState
 	virtual void EjectQuarter() = 0;
 	virtual void TurnCrank() = 0;
 	virtual void Dispense() = 0;
+	virtual void Refill(unsigned numBalls) = 0;
 	virtual std::string ToString()const = 0;
 	virtual ~IState() = default;
 };

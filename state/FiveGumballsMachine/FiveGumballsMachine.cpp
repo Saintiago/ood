@@ -28,6 +28,12 @@ void CFiveGumballsMachine::TurnCrank()
 	m_state->TurnCrank();
 	m_state->Dispense();
 }
+
+void CFiveGumballsMachine::Refill(unsigned numBalls)
+{
+	m_state->Refill(numBalls);
+}
+
 std::string CFiveGumballsMachine::ToString()const
 {
 	auto fmt = boost::format(R"(
@@ -46,6 +52,11 @@ unsigned CFiveGumballsMachine::GetBallCount() const
 unsigned CFiveGumballsMachine::GetCoinsCount() const
 {
 	return m_coinsCount;
+}
+
+void CFiveGumballsMachine::SetBallsCount(unsigned ballsCount)
+{
+	m_count = ballsCount;
 }
 
 void CFiveGumballsMachine::AddCoin()

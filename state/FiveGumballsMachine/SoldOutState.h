@@ -8,6 +8,23 @@ public:
 		:m_gumballMachine(gumballMachine)
 	{}
 
+	void Refill(unsigned numBalls)
+	{
+		m_gumballMachine.SetBallsCount(numBalls);
+		std::cout << "Macine refilled successfully\n";
+		if (numBalls > 0)
+		{
+			if (m_gumballMachine.GetCoinsCount() > 0)
+			{
+				m_gumballMachine.SetHasQuarterState();
+			}
+			else
+			{
+				m_gumballMachine.SetNoQuarterState();
+			}
+		}
+	}
+
 	void InsertQuarter() override
 	{
 		std::cout << "You can't insert a quarter, the machine is sold out\n";

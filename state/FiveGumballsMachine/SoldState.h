@@ -7,6 +7,12 @@ public:
 	CSoldState(IFiveGumballMachine & gumballMachine)
 		:m_gumballMachine(gumballMachine)
 	{}
+
+	void Refill(unsigned numBalls)
+	{
+		std::cout << "Wait until gumball is dispensed\n";
+	}
+
 	void InsertQuarter() override
 	{
 		std::cout << "Please wait, we're already giving you a gumball\n";

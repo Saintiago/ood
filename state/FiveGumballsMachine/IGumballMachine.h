@@ -18,4 +18,5 @@ struct IFiveGumballMachine : IGumballMachine
 	virtual unsigned GetCoinsCount()const = 0;
 	virtual void AddCoin() = 0;
 	virtual void SpendCoin() = 0;
+	virtual void SetBallsCount(unsigned) = 0;
 };
