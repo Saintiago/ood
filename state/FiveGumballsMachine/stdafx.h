@@ -13,3 +13,8 @@
 
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы
+
+#include <iostream>
+#include <boost/format.hpp>
+#include "IState.h"
+#include "IGumballMachine.h"

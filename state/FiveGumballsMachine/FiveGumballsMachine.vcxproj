@@ -146,7 +146,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FiveGumballsMachine.h" />
+    <ClInclude Include="HasQuarterState.h" />
+    <ClInclude Include="IGumballMachine.h" />
+    <ClInclude Include="IState.h" />
     <ClInclude Include="NaiveFiveGumballsMachine.h" />
+    <ClInclude Include="NoQuarterState.h" />
+    <ClInclude Include="SoldOutState.h" />
+    <ClInclude Include="SoldState.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
