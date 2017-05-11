@@ -4,12 +4,13 @@
 class CNoQuarterState : public IState
 {
 public:
-	CNoQuarterState(IGumballMachine & gumballMachine)
+	CNoQuarterState(IFiveGumballMachine & gumballMachine)
 		: m_gumballMachine(gumballMachine)
 	{}
 
 	void InsertQuarter() override
 	{
+		m_gumballMachine.AddCoin();
 		std::cout << "You inserted a quarter\n";
 		m_gumballMachine.SetHasQuarterState();
 	}
@@ -30,5 +31,5 @@ public:
 		return "waiting for quarter";
 	}
 private:
-	IGumballMachine & m_gumballMachine;
+	IFiveGumballMachine & m_gumballMachine;
 };

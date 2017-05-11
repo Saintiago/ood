@@ -4,7 +4,7 @@
 class CSoldOutState : public IState
 {
 public:
-	CSoldOutState(IGumballMachine & gumballMachine)
+	CSoldOutState(IFiveGumballMachine & gumballMachine)
 		:m_gumballMachine(gumballMachine)
 	{}
 
@@ -29,5 +29,5 @@ public:
 		return "sold out";
 	}
 private:
-	IGumballMachine & m_gumballMachine;
+	IFiveGumballMachine & m_gumballMachine;
 };

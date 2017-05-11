@@ -4,7 +4,7 @@
 class CSoldState : public IState
 {
 public:
-	CSoldState(IGumballMachine & gumballMachine)
+	CSoldState(IFiveGumballMachine & gumballMachine)
 		:m_gumballMachine(gumballMachine)
 	{}
 	void InsertQuarter() override
@@ -27,9 +27,13 @@ public:
 			std::cout << "Oops, out of gumballs\n";
 			m_gumballMachine.SetSoldOutState();
 		}
-		else
+		else if (m_gumballMachine.GetCoinsCount() == 0)
 		{
 			m_gumballMachine.SetNoQuarterState();
+		}
+		else
+		{
+			m_gumballMachine.SetHasQuarterState();
 		}
 	}
 	std::string ToString() const override
@@ -37,5 +41,5 @@ public:
 		return "delivering a gumball";
 	}
 private:
-	IGumballMachine & m_gumballMachine;
+	IFiveGumballMachine & m_gumballMachine;
 };

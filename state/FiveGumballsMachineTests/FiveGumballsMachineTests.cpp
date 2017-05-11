@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "../FiveGumballsMachine/NaiveFiveGumballsMachine.h"
+#include "../FiveGumballsMachine/FiveGumballsMachine.h"
 #include <string>
 
 using namespace std;
@@ -24,7 +25,8 @@ Inventory: %1% gumball%2%, %3% coin%4%
 Machine is %5%
 )");
 
-	CNaiveFiveGumballsMachine machine;
+	//CNaiveFiveGumballsMachine machine;
+	CFiveGumballsMachine machine;
 	FiveGumballsMachine_()
 		: machine(5)
 	{}
@@ -136,7 +138,6 @@ BOOST_FIXTURE_TEST_SUITE(FiveGumballsMachine, FiveGumballsMachine_)
 			}
 
 		BOOST_AUTO_TEST_SUITE_END()
-		
 
 	BOOST_AUTO_TEST_SUITE_END()
 

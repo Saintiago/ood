@@ -4,22 +4,31 @@
 class CHasQuarterState : public IState
 {
 public:
-	CHasQuarterState(IGumballMachine & gumballMachine)
+	CHasQuarterState(IFiveGumballMachine & gumballMachine)
 		:m_gumballMachine(gumballMachine)
 	{}
 
 	void InsertQuarter() override
 	{
-		std::cout << "You can't insert another quarter\n";
+		if (m_gumballMachine.GetCoinsCount() < 5)
+		{
+			m_gumballMachine.AddCoin();
+			std::cout << "You inserted a quarter\n";
+		}
+		else
+		{
+			std::cout << "You can't insert another quarter\n";
+		}
 	}
 	void EjectQuarter() override
 	{
-		std::cout << "Quarter returned\n";
+		std::cout << "Quarters returned\n";
 		m_gumballMachine.SetNoQuarterState();
 	}
 	void TurnCrank() override
 	{
 		std::cout << "You turned...\n";
+		m_gumballMachine.SpendCoin();
 		m_gumballMachine.SetSoldState();
 	}
 	void Dispense() override
@@ -31,5 +40,5 @@ public:
 		return "waiting for turn of crank";
 	}
 private:
-	IGumballMachine & m_gumballMachine;
+	IFiveGumballMachine & m_gumballMachine;
 };

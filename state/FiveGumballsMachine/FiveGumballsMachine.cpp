@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "FiveGumballsMachine.h"
 
-
 CFiveGumballsMachine::CFiveGumballsMachine(unsigned numBalls)
 	: m_soldState(*this)
 	, m_soldOutState(*this)
@@ -17,6 +16,7 @@ CFiveGumballsMachine::CFiveGumballsMachine(unsigned numBalls)
 }
 void CFiveGumballsMachine::EjectQuarter()
 {
+	m_coinsCount = 0;
 	m_state->EjectQuarter();
 }
 void CFiveGumballsMachine::InsertQuarter()
@@ -32,17 +32,31 @@ std::string CFiveGumballsMachine::ToString()const
 {
 	auto fmt = boost::format(R"(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: %1% gumball%2%
-Machine is %3%
+C++-enabled Standing Gumball Model #2016
+Inventory: %1% gumball%2%, %3% coin%4%
+Machine is %5%
 )");
-	return (fmt % m_count % (m_count != 1 ? "s" : "") % m_state->ToString()).str();
+	return (fmt % m_count % (m_count != 1 ? "s" : "") % m_coinsCount % (m_coinsCount != 1 ? "s" : "") % m_state->ToString()).str();
 }
 
 unsigned CFiveGumballsMachine::GetBallCount() const
 {
 	return m_count;
 }
+unsigned CFiveGumballsMachine::GetCoinsCount() const
+{
+	return m_coinsCount;
+}
+
+void CFiveGumballsMachine::AddCoin()
+{
+	++m_coinsCount;
+}
+void CFiveGumballsMachine::SpendCoin()
+{
+	--m_coinsCount;
+}
+
 void CFiveGumballsMachine::ReleaseBall()
 {
 	if (m_count != 0)

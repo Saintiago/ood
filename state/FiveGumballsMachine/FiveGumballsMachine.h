@@ -5,7 +5,7 @@
 #include "SoldOutState.h"
 #include "SoldState.h"
 
-class CFiveGumballsMachine : private IGumballMachine
+class CFiveGumballsMachine : private IFiveGumballMachine
 {
 public:
 	CFiveGumballsMachine(unsigned numBalls);
@@ -17,13 +17,17 @@ public:
 	std::string ToString()const;
 private:
 	unsigned GetBallCount() const override;
-	virtual void ReleaseBall() override;
+	unsigned GetCoinsCount() const override;
+	void AddCoin();
+	void SpendCoin();
+	void ReleaseBall() override;
 	void SetSoldOutState() override;
 	void SetNoQuarterState() override;
 	void SetSoldState() override;
 	void SetHasQuarterState() override;
 private:
 	unsigned m_count = 0;
+	unsigned m_coinsCount = 0;
 	CSoldState m_soldState;
 	CSoldOutState m_soldOutState;
 	CNoQuarterState m_noQuarterState;

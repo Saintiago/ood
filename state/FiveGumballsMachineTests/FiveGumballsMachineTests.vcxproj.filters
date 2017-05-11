@@ -27,6 +27,9 @@
     <ClInclude Include="..\FiveGumballsMachine\NaiveFiveGumballsMachine.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="..\FiveGumballsMachine\FiveGumballsMachine.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -39,6 +42,9 @@
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
     <ClCompile Include="..\FiveGumballsMachine\NaiveFiveGumballsMachine.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FiveGumballsMachine\FiveGumballsMachine.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
   </ItemGroup>
