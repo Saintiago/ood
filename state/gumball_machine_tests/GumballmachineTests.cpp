@@ -74,7 +74,7 @@ BOOST_FIXTURE_TEST_SUITE(GumballMachine, GumballMachine_)
 	// когда создан непустым
 	BOOST_FIXTURE_TEST_SUITE(when_creating_machine_with_two_gumballs, when_creating_machine_with_two_gumballs_)
 
-		// назходится в состоянии ожидания монетки
+		// находится в состоянии ожидания монетки
 		BOOST_AUTO_TEST_CASE(is_in_no_quarter_state)
 		{
 			string expectedGumballMachineString = (fmt % 2 % "s" % "waiting for quarter").str();
