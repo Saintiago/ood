@@ -226,25 +226,19 @@ BOOST_FIXTURE_TEST_SUITE(Document, Document_)
 	// История содержит максимум 10 комманд
 	BOOST_AUTO_TEST_CASE(remembers_10_commands_max)
 	{
-		document.InsertParagraph("p1");
-		document.InsertParagraph("p2");
-		document.InsertParagraph("p3");
-		document.InsertParagraph("p4");
-		document.InsertParagraph("p5");
-		document.InsertParagraph("p6");
-		document.InsertParagraph("p7");
-		document.InsertParagraph("p8");
-		document.InsertParagraph("p9");
-		document.InsertParagraph("p10");
+		for (int i = 1; i <= 11; i++)
+		{
+			document.InsertParagraph("p" + i);
+		}
 
+		for (int i = 0; i < 10; i++)
+		{
+			document.Undo();
+		}
+
+		BOOST_CHECK_THROW(document.Undo(), logic_error);
 		BOOST_CHECK_EQUAL("p1", document.GetItem(0)->GetParagraph()->GetText());
-		BOOST_CHECK_EQUAL("p10", document.GetItem(9)->GetParagraph()->GetText());
-
-		document.InsertParagraph("p11");
-
-		BOOST_CHECK_EQUAL("p2", document.GetItem(0)->GetParagraph()->GetText());
-		BOOST_CHECK_EQUAL("p11", document.GetItem(9)->GetParagraph()->GetText());
-		BOOST_CHECK_THROW(document.GetItem(10)->GetParagraph()->GetText(), out_of_range);
+		BOOST_CHECK_THROW(document.GetItem(1), out_of_range);
 	}
 
 BOOST_AUTO_TEST_SUITE_END()
