@@ -170,6 +170,7 @@
     <ClInclude Include="..\DocumentEditor\Paragraph.h" />
     <ClInclude Include="..\DocumentEditor\ReplaceTextCommand.h" />
     <ClInclude Include="..\DocumentEditor\ResizeImageCommand.h" />
+    <ClInclude Include="..\DocumentEditor\UserInterface.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -188,6 +189,7 @@
     <ClCompile Include="..\DocumentEditor\Paragraph.cpp" />
     <ClCompile Include="..\DocumentEditor\ReplaceTextCommand.cpp" />
     <ClCompile Include="..\DocumentEditor\ResizeImageCommand.cpp" />
+    <ClCompile Include="..\DocumentEditor\UserInterface.cpp" />
     <ClCompile Include="DocumentTests.cpp" />
     <ClCompile Include="ImageInsertionTests.cpp" />
     <ClCompile Include="Tests.cpp" />
@@ -197,6 +199,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="UserInterfaceTests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

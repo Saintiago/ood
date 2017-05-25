@@ -16,7 +16,7 @@ struct Image_
 	Image_()
 	{
 		Path destination = fs::current_path() / "images\\image_test.png";
-		fs::copy_file(fs::current_path() / "source\\image.png", destination);
+		fs::copy_file(fs::current_path() / "source\\image.png", destination, fs::copy_option::overwrite_if_exists);
 		image = shared_ptr<IImage>(new CImage(100, 100, destination));
 	}
 };

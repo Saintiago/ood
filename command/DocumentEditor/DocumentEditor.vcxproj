@@ -165,6 +165,7 @@
     <ClCompile Include="ReplaceTextCommand.cpp" />
     <ClCompile Include="ResizeImageCommand.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractCommand.h" />
@@ -190,6 +191,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="types.h" />
+    <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
