@@ -105,17 +105,17 @@ void CDocument::List(ostream& output)
 void CDocument::Help(ostream& output)
 {
 	output << "Available commands:" << endl;
-	output << "InsertParagraph <позиция>|end <текст параграфа>" << endl;
-	output << "InsertImage <позиция>|end <ширина> <высота> <путь к файлу изображения>" << endl;
-	output << "SetTitle <заголовок документа>" << endl;
+	output << "InsertParagraph <position>|end <text>" << endl;
+	output << "InsertImage <position>|end <width> <height> <path>" << endl;
+	output << "SetTitle <Title>" << endl;
 	output << "List" << endl;
-	output << "ReplaceText <позиция> <текст параграфа>" << endl;
-	output << "ResizeImage <позиция> <ширина> <высота>" << endl;
-	output << "DeleteItem <позиция>" << endl;
+	output << "ReplaceText <position> <text>" << endl;
+	output << "ResizeImage <position> <width> <height>" << endl;
+	output << "DeleteItem <position>" << endl;
 	output << "Help" << endl;
 	output << "Undo" << endl;
 	output << "Redo" << endl;
-	output << "Save <путь>" << endl;
+	output << "Save <path>" << endl;
 }
 
 void CDocument::ReplaceText(size_t position, string newValue)

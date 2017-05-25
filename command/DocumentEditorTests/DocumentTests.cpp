@@ -228,7 +228,7 @@ BOOST_FIXTURE_TEST_SUITE(Document, Document_)
 	{
 		for (int i = 1; i <= 11; i++)
 		{
-			document.InsertParagraph("p" + i);
+			document.InsertParagraph("p" + to_string(i));
 		}
 
 		for (int i = 0; i < 10; i++)

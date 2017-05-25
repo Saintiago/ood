@@ -4,13 +4,13 @@
 class CParagraph : public IParagraph
 {
 public:
-	CParagraph(std::string& text);
+	CParagraph(std::string text);
 	~CParagraph() = default;
 
-	string & GetText()const;
-	void SetText(string& text);
+	const string & GetText()const;
+	void SetText(string text);
 
 private:
-	std::string & m_text;
+	std::string m_text;
 };
 
