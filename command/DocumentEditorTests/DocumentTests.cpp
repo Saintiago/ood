@@ -133,20 +133,6 @@ BOOST_FIXTURE_TEST_SUITE(Document, Document_)
 
 	}
 
-	// можно заменить текст в параграфе на выбранной позиции
-	BOOST_AUTO_TEST_CASE(can_replace_text_in_paragraph_at_specified_position)
-	{
-		string textBefore = "This is very first paragraph";
-		document.InsertParagraph(textBefore);
-		BOOST_CHECK_EQUAL(textBefore, document.GetItem(0)->GetParagraph()->GetText());
-
-		string textAfter = "Replaced text";
-		document.ReplaceText(0, textAfter);
-		BOOST_CHECK_EQUAL(textAfter, document.GetItem(0)->GetParagraph()->GetText());
-
-		BOOST_CHECK_THROW(document.ReplaceText(1, textAfter), out_of_range);
-	}
-
 	// Изменяет размер изображения, находящегося в указанной позиции документа
 	BOOST_AUTO_TEST_CASE(can_resize_image_at_specified_position)
 	{
@@ -239,18 +225,6 @@ BOOST_FIXTURE_TEST_SUITE(Document, Document_)
 		BOOST_CHECK_THROW(document.Undo(), logic_error);
 		BOOST_CHECK_EQUAL("p1", document.GetItem(0)->GetParagraph()->GetText());
 		BOOST_CHECK_THROW(document.GetItem(1), out_of_range);
-	}
-
-	// InsertParagraph ReplaceText Undo Undo Redo Redo. Должен сохраниться измененный текст.
-	BOOST_AUTO_TEST_CASE(replaced_text_should_stay)
-	{
-		document.InsertParagraph("Original text");
-		document.ReplaceText(0, "Replaced text");
-		document.Undo();
-		document.Undo();
-		document.Redo();
-		document.Redo();
-		BOOST_CHECK_EQUAL("Replaced text", document.GetItem(0)->GetParagraph()->GetText());
 	}
 
 BOOST_AUTO_TEST_SUITE_END()

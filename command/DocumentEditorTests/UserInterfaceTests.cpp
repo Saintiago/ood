@@ -141,5 +141,27 @@ BOOST_FIXTURE_TEST_SUITE(UserInterface, UserInterface_)
 		fs::remove_all(savePath);
 	}
 
+	// InsertParagraph ReplaceText Undo Undo Redo Redo. ƒолжен сохранитьс€ измененный текст.
+	BOOST_AUTO_TEST_CASE(replaced_text_should_stay)
+	{
+		stringInput << "InsertParagraph end Original text" << endl;
+		stringInput << "ReplaceText 0 Replaced text" << endl;
+		stringInput << "Undo" << endl;
+		stringInput << "Undo" << endl;
+		stringInput << "Redo" << endl;
+		stringInput << "Redo" << endl;
+
+		ui.StartListeningInput();
+
+		stringstream expected;
+		expected << "Title : " << endl
+			<< "0. Paragraph : Replaced text" << endl;
+
+		stringOutput.str(std::string());
+		ui.List();
+
+		BOOST_CHECK_EQUAL(expected.str(), stringOutput.str());
+	}
+
 
 BOOST_AUTO_TEST_SUITE_END()

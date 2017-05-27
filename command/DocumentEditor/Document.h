@@ -21,7 +21,8 @@ public:
 
 	void List(ostream& output);
 
-	void ReplaceText(size_t position, string newValue);
+	void AddAndExecuteCommand(ICommandPtr && command);
+
 	void ResizeImage(size_t position, int width, int height);
 	void DeleteItem(size_t index);
 

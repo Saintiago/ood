@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "UserInterface.h"
+#include "ReplaceTextCommand.h"
+#include "ResizeImageCommand.h"
 #include <exception>
 #include <boost/algorithm/string/join.hpp>
 
@@ -90,9 +92,10 @@ void CUserInterface::ExecuteCommand(const string & commandLine)
 
 	else if (command == "ReplaceText")
 	{
-		string index = PopFront(params);
+		int index = stoi(PopFront(params));
 		string text = ImplodeViaSpace(params);
-		m_document.ReplaceText(stoi(index), text);
+		shared_ptr<IParagraph> paragraph = m_document.GetItem(index)->GetParagraph();	
+		m_document.AddAndExecuteCommand(make_unique<CReplaceTextCommand>(paragraph, text));
 	}
 
 	else if (command == "DeleteItem")

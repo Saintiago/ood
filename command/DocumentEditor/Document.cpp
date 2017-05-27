@@ -103,18 +103,9 @@ void CDocument::List(ostream& output)
 	}
 }
 
-void CDocument::ReplaceText(size_t position, string newValue)
+void CDocument::AddAndExecuteCommand(ICommandPtr && command)
 {
-	if (m_storage.GetSize() <= position)
-	{
-		throw out_of_range("There is no paragraph at " + position);
-	}
-	shared_ptr<IParagraph> paragraph = m_storage.GetItem(position)->GetParagraph();
-	if (paragraph == nullptr)
-	{
-		throw out_of_range("There is no paragraph at " + position);
-	}
-	m_history.AddAndExecuteCommand(make_unique<CReplaceTextCommand>(paragraph, newValue));
+	m_history.AddAndExecuteCommand(move(command));
 }
 
 void CDocument::ResizeImage(size_t position, int width, int height)

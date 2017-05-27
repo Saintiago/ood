@@ -26,9 +26,6 @@ public:
 	// ¬ыводит название и список элементов документа в стандартный поток вывода
 	virtual void List(ostream& output) = 0;
 
-	// «амен€ет текст в параграфе, наход€щемс€ в указанной позиции документа
-	virtual void ReplaceText(size_t position, string newValue) = 0;
-
 	// »змен€ет размер изображени€, наход€щегос€ в указанной позиции документа
 	virtual void ResizeImage(size_t position, int width, int height) = 0;
 
