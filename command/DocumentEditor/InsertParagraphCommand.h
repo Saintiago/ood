@@ -13,7 +13,7 @@ protected:
 	void DoUnexecute() override;
 
 private:
-	std::string m_text;
+	std::shared_ptr<IParagraph> m_paragraph;
 	CDocumentStorage& m_target;
 	size_t m_position;
 };

@@ -241,4 +241,16 @@ BOOST_FIXTURE_TEST_SUITE(Document, Document_)
 		BOOST_CHECK_THROW(document.GetItem(1), out_of_range);
 	}
 
+	// InsertParagraph ReplaceText Undo Undo Redo Redo. ƒолжен сохранитьс€ измененный текст.
+	BOOST_AUTO_TEST_CASE(replaced_text_should_stay)
+	{
+		document.InsertParagraph("Original text");
+		document.ReplaceText(0, "Replaced text");
+		document.Undo();
+		document.Undo();
+		document.Redo();
+		document.Redo();
+		BOOST_CHECK_EQUAL("Replaced text", document.GetItem(0)->GetParagraph()->GetText());
+	}
+
 BOOST_AUTO_TEST_SUITE_END()
