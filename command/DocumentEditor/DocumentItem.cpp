@@ -3,7 +3,7 @@
 
 using namespace std;
 
-CDocumentItem::CDocumentItem(shared_ptr<IImage> imagePtr, shared_ptr<IParagraph> paragraphPtr)
+CDocumentItem::CDocumentItem(const shared_ptr<IImage> & imagePtr, const shared_ptr<IParagraph> & paragraphPtr)
 	: m_imagePtr(imagePtr)
 	, m_paragraphPtr(paragraphPtr)
 {

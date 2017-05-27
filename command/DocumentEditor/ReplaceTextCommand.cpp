@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ReplaceTextCommand.h"
 
-CReplaceTextCommand::CReplaceTextCommand(shared_ptr<IParagraph> target, std::string & newValue)
+CReplaceTextCommand::CReplaceTextCommand(const shared_ptr<IParagraph> & target, std::string & newValue)
 	: m_target(target)
 	, m_newValue(newValue)
 {

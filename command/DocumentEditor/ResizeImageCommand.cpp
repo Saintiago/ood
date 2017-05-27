@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ResizeImageCommand.h"
 
-CResizeImageCommand::CResizeImageCommand(shared_ptr<IImage> target, int width, int height)
+CResizeImageCommand::CResizeImageCommand(const shared_ptr<IImage> & target, int width, int height)
 	: m_target(target)
 	, m_newWidth(width)
 	, m_newHeight(height)

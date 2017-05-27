@@ -6,7 +6,7 @@ class CResizeImageCommand :
 	public CAbstractCommand
 {
 public:
-	CResizeImageCommand(std::shared_ptr<IImage> target, int width, int height);
+	CResizeImageCommand(const std::shared_ptr<IImage> & target, int width, int height);
 
 protected:
 	void DoExecute() override;

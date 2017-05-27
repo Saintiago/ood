@@ -8,7 +8,7 @@ using namespace std;
 class CDocumentItem
 {
 public:
-	CDocumentItem(shared_ptr<IImage> imagePtr = nullptr, shared_ptr<IParagraph> paragraphPtr = nullptr);
+	CDocumentItem(const shared_ptr<IImage> & imagePtr = nullptr, const shared_ptr<IParagraph> & paragraphPtr = nullptr);
 
 	// ¬озвращает указатель на константное изображение, либо nullptr, если элемент не €вл€етс€ изображением
 	shared_ptr<IImage> GetImage()const;

@@ -6,7 +6,7 @@ class CReplaceTextCommand :
 	public CAbstractCommand
 {
 public:
-	CReplaceTextCommand(std::shared_ptr<IParagraph> target, std::string & newValue);
+	CReplaceTextCommand(const std::shared_ptr<IParagraph> & target, std::string & newValue);
 
 protected:
 	void DoExecute() override;
