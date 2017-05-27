@@ -45,6 +45,14 @@ CImageImpl::~CImageImpl()
 {
 	if (m_deleteResource)
 	{
-		boost::filesystem::remove(m_path);
+		try
+		{
+			boost::filesystem::remove(m_path);
+		}
+		catch (exception e)
+		{
+			// Exceptions should not leave destructor body
+		}
+		
 	}
 }
