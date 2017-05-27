@@ -41,7 +41,7 @@ struct InsertImageCommand_
 	CInsertImageCommand insertImage;
 
 	InsertImageCommand_()
-		: insertImage(storage, 100, 100, { fs::current_path() / "image.png" }, 0)
+		: insertImage(storage, 100, 100, { fs::current_path() / "source/image.png" }, 0)
 	{
 		insertImage.Execute();
 	}
@@ -61,7 +61,7 @@ BOOST_FIXTURE_TEST_SUITE(InsertImageCommand, InsertImageCommand_)
 	// копируется с уникальным именем и своим расширением
 	BOOST_AUTO_TEST_CASE(copied_with_unique_name)
 	{
-		CInsertImageCommand insertImage2(storage, 100, 100, { fs::current_path() / "image.png" }, 1);
+		CInsertImageCommand insertImage2(storage, 100, 100, { fs::current_path() / "source/image.png" }, 1);
 		insertImage2.Execute();
 		BOOST_CHECK(storage.GetItem(0)->GetImage()->GetPath() != storage.GetItem(1)->GetImage()->GetPath());
 	}
@@ -79,7 +79,7 @@ BOOST_FIXTURE_TEST_SUITE(InsertImageCommand, InsertImageCommand_)
 		string resourceLocation;
 		{
 			insertImage.Execute();
-			CInsertImageCommand insertImage2(storage, 100, 100, { boost::filesystem::current_path() / "image.png" }, 1);
+			CInsertImageCommand insertImage2(storage, 100, 100, { boost::filesystem::current_path() / "source/image.png" }, 1);
 			insertImage2.Execute();
 			resourceLocation = storage.GetItem(1)->GetImage()->GetPath().string();
 			insertImage2.Unexecute();
@@ -92,7 +92,7 @@ BOOST_FIXTURE_TEST_SUITE(InsertImageCommand, InsertImageCommand_)
 	BOOST_AUTO_TEST_CASE(resource_remains_if_command_deleted_after_executing)
 	{
 		string resourceLocation;
-		CInsertImageCommand insertImage2(storage, 100, 100, { boost::filesystem::current_path() / "image.png" }, 0);
+		CInsertImageCommand insertImage2(storage, 100, 100, { boost::filesystem::current_path() / "source/image.png" }, 0);
 		insertImage2.Execute();
 		resourceLocation = storage.GetItem(0)->GetImage()->GetPath().string();
 		BOOST_CHECK(boost::filesystem::exists(resourceLocation));

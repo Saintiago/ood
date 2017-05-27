@@ -8,6 +8,7 @@ using namespace std;
 
 Params ExplodeViaSpace(const string & commandLine);
 string ImplodeViaSpace(Params params);
+string PopFront(Params & params);
 
 CUserInterface::CUserInterface(istream & input, ostream & output)
 	: m_input(input)
@@ -42,13 +43,11 @@ void CUserInterface::StartListeningInput()
 void CUserInterface::ExecuteCommand(const string & commandLine)
 {
 	Params params = ExplodeViaSpace(commandLine);
-	string command = params.at(0);
-	params.erase(params.begin());
+	string command = PopFront(params);
 
 	if (command == "InsertParagraph")
 	{
-		string index = params.at(0);
-		params.erase(params.begin());
+		string index = PopFront(params);
 		string text = ImplodeViaSpace(params);
 
 		if (index == "end")
@@ -58,6 +57,23 @@ void CUserInterface::ExecuteCommand(const string & commandLine)
 		else
 		{
 			m_document.InsertParagraph(text, stoi(index));
+		}
+	}
+
+	if (command == "InsertImage")
+	{
+		string index = PopFront(params);
+		int width = stoi(PopFront(params));
+		int height = stoi(PopFront(params));
+		Path path = { PopFront(params) };
+
+		if (index == "end")
+		{
+			m_document.InsertImage(path, width, height);
+		}
+		else
+		{
+			m_document.InsertImage(path, width, height, stoi(index));
 		}
 	}
 
@@ -74,8 +90,7 @@ void CUserInterface::ExecuteCommand(const string & commandLine)
 
 	else if (command == "ReplaceText")
 	{
-		string index = params.at(0);
-		params.erase(params.begin());
+		string index = PopFront(params);
 		string text = ImplodeViaSpace(params);
 		m_document.ReplaceText(stoi(index), text);
 	}
@@ -88,7 +103,7 @@ void CUserInterface::ExecuteCommand(const string & commandLine)
 
 	else if (command == "Help")
 	{
-		m_document.Help(m_output);
+		Help();
 	}
 
 	else if (command == "Save")
@@ -123,6 +138,22 @@ void CUserInterface::SetTitle(const std::string & title)
 	m_document.SetTitle(title);
 }
 
+void CUserInterface::Help()
+{
+	m_output << "Available commands:" << endl;
+	m_output << "InsertParagraph <position>|end <text>" << endl;
+	m_output << "InsertImage <position>|end <width> <height> <path>" << endl;
+	m_output << "SetTitle <Title>" << endl;
+	m_output << "List" << endl;
+	m_output << "ReplaceText <position> <text>" << endl;
+	m_output << "ResizeImage <position> <width> <height>" << endl;
+	m_output << "DeleteItem <position>" << endl;
+	m_output << "Help" << endl;
+	m_output << "Undo" << endl;
+	m_output << "Redo" << endl;
+	m_output << "Save <path>" << endl;
+}
+
 Params ExplodeViaSpace(const string & commandLine)
 {
 	stringstream ss(commandLine);
@@ -139,4 +170,11 @@ Params ExplodeViaSpace(const string & commandLine)
 string ImplodeViaSpace(Params params)
 {
 	return boost::algorithm::join(params, " ");
+}
+
+string PopFront(Params & params)
+{
+	string frontParam = params.at(0);
+	params.erase(params.begin());
+	return frontParam;
 }

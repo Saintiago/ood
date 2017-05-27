@@ -20,7 +20,6 @@ public:
 	DocumentItemPtr GetItem(size_t index)const;
 
 	void List(ostream& output);
-	void Help(ostream& output);
 
 	void ReplaceText(size_t position, string newValue);
 	void ResizeImage(size_t position, int width, int height);
@@ -40,5 +39,6 @@ private:
 	CDocumentStorage m_storage;
 
 	void ToHtml(ostream& output)const;
+	std::string Encode(std::string str)const;
 	void CopyResources(const Path& resourcesDir)const;
 };

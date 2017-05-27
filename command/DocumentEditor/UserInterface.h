@@ -10,6 +10,7 @@ public:
 	void StartListeningInput();
 	void List();
 	void SetTitle(const std::string & title);
+	void Help();
 
 private:
 	CDocument m_document;

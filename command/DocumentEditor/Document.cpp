@@ -10,6 +10,7 @@
 #include "Paragraph.h"
 
 #include <fstream>
+#include <boost/algorithm/string/replace.hpp>
 
 using namespace std;
 namespace fs = boost::filesystem;
@@ -102,22 +103,6 @@ void CDocument::List(ostream& output)
 	}
 }
 
-void CDocument::Help(ostream& output)
-{
-	output << "Available commands:" << endl;
-	output << "InsertParagraph <position>|end <text>" << endl;
-	output << "InsertImage <position>|end <width> <height> <path>" << endl;
-	output << "SetTitle <Title>" << endl;
-	output << "List" << endl;
-	output << "ReplaceText <position> <text>" << endl;
-	output << "ResizeImage <position> <width> <height>" << endl;
-	output << "DeleteItem <position>" << endl;
-	output << "Help" << endl;
-	output << "Undo" << endl;
-	output << "Redo" << endl;
-	output << "Save <path>" << endl;
-}
-
 void CDocument::ReplaceText(size_t position, string newValue)
 {
 	if (m_storage.GetSize() <= position)
@@ -173,7 +158,7 @@ void CDocument::ToHtml(ostream& output)const
 {
 	// Put there heading
 	output << "<!DOCTYPE html><html><head>"
-		<< "<title>" << GetTitle() << "</title>"
+		<< "<title>" << Encode(GetTitle()) << "</title>"
 		<< "</head><body>";
 
 	// Put there all document items
@@ -184,12 +169,12 @@ void CDocument::ToHtml(ostream& output)const
 
 		if (image != nullptr)
 		{
-			output << "<img width=\"" << image->GetWidth() << "\" height=\"" << image->GetHeight() << "\" src=" << image->GetPath() << " />";
+			output << "<img width=\"" << image->GetWidth() << "\" height=\"" << image->GetHeight() << "\" src=\"" << Encode(image->GetPath().string()) << "\" />";
 		}
 
 		if (paragraph != nullptr)
 		{
-			output << "<p>" << paragraph->GetText() << "</p>";
+			output << "<p>" << Encode(paragraph->GetText()) << "</p>";
 		}
 	}
 
@@ -211,3 +196,12 @@ void CDocument::CopyResources(const Path& resourcesDir)const
 	}
 }
 
+std::string CDocument::Encode(std::string str)const
+{
+	boost::replace_all(str, "<", "&lt;");
+	boost::replace_all(str, ">", "&gt;");
+	boost::replace_all(str, "\"", "&quot;");
+	boost::replace_all(str, "'", "&apos;");
+	boost::replace_all(str, "&", "&amp;");
+	return str;
+}

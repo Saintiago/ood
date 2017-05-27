@@ -26,9 +26,6 @@ public:
 	// ¬ыводит название и список элементов документа в стандартный поток вывода
 	virtual void List(ostream& output) = 0;
 
-	// ¬ыводит справку о доступных командах редактировани€ и их аргументах
-	virtual void Help(ostream& output) = 0;
-
 	// «амен€ет текст в параграфе, наход€щемс€ в указанной позиции документа
 	virtual void ReplaceText(size_t position, string newValue) = 0;
 
