@@ -83,8 +83,11 @@ void CDocument::List(ostream& output)
 {
 	output << "Title : " << GetTitle() << endl;
 	unsigned index = 0;
-	for (auto & documentItem : m_storage.GetItems())
+
+	for (unsigned i = 0; i < m_storage.GetSize(); ++i)
 	{
+		ConstDocumentItemPtr documentItem = m_storage.GetConstItem(i);
+
 		shared_ptr<IImage> image = documentItem->GetImage();
 		shared_ptr<IParagraph> paragraph = documentItem->GetParagraph();
 
@@ -144,8 +147,9 @@ void CDocument::ToHtml(ostream& output)const
 		<< "</head><body>";
 
 	// Put there all document items
-	for (auto & documentItem : m_storage.GetItems())
+	for (unsigned i = 0; i < m_storage.GetSize(); ++i)
 	{
+		ConstDocumentItemPtr documentItem = m_storage.GetConstItem(i);
 		shared_ptr<IImage> image = documentItem->GetImage();
 		shared_ptr<IParagraph> paragraph = documentItem->GetParagraph();
 
@@ -166,8 +170,9 @@ void CDocument::ToHtml(ostream& output)const
 
 void CDocument::CopyResources(const Path& resourcesDir)const
 {
-	for (auto & documentItem : m_storage.GetItems())
+	for (unsigned i = 0; i < m_storage.GetSize(); ++i)
 	{
+		ConstDocumentItemPtr documentItem = m_storage.GetConstItem(i);
 		shared_ptr<IImage> image = documentItem->GetImage();
 
 		if (image != nullptr)

@@ -35,12 +35,12 @@ DocumentItemPtr CDocumentStorage::GetItem(size_t index)const
 	return m_documentItems.at(index);
 }
 
-deque<DocumentItemPtr> CDocumentStorage::GetItems()const
+ConstDocumentItemPtr CDocumentStorage::GetConstItem(size_t index)const
 {
-	return m_documentItems;
+	return m_documentItems.at(index);
 }
 
-size_t CDocumentStorage::GetSize()
+size_t CDocumentStorage::GetSize()const
 {
 	return m_documentItems.size();
 }
