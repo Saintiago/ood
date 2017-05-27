@@ -98,6 +98,15 @@ void CUserInterface::ExecuteCommand(const string & commandLine)
 		m_document.AddAndExecuteCommand(make_unique<CReplaceTextCommand>(paragraph, text));
 	}
 
+	else if (command == "ResizeImage")
+	{
+		int index = stoi(PopFront(params));
+		int width = stoi(PopFront(params));
+		int height = stoi(PopFront(params));
+		shared_ptr<IImage> image = m_document.GetItem(index)->GetImage();
+		m_document.AddAndExecuteCommand(make_unique<CResizeImageCommand>(image, width, height));
+	}
+
 	else if (command == "DeleteItem")
 	{
 		string index = params.at(0);

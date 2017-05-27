@@ -26,9 +26,6 @@ public:
 	// Выводит название и список элементов документа в стандартный поток вывода
 	virtual void List(ostream& output) = 0;
 
-	// Изменяет размер изображения, находящегося в указанной позиции документа
-	virtual void ResizeImage(size_t position, int width, int height) = 0;
-
 	// Возвращает количество элементов в документе
 //	virtual size_t GetItemsCount()const = 0;
 

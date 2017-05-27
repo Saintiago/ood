@@ -86,6 +86,27 @@ BOOST_FIXTURE_TEST_SUITE(UserInterface, UserInterface_)
 		BOOST_CHECK_EQUAL(expected.str(), stringOutput.str());
 	}
 
+	// может выполнять команду ResizeImage
+	BOOST_AUTO_TEST_CASE(can_resize_image_at_specified_position)
+	{
+		Path imagePath = fs::current_path() / "source/image.png";
+		stringInput << "InsertImage end 50 100 " << imagePath.string() << endl;
+		stringInput << "ResizeImage 0 200 300" << endl;
+
+		ui.StartListeningInput();
+
+		stringstream expected;
+		expected << "Title : " << endl
+			<< "0. Image : 200 300";
+
+		stringOutput.str(std::string());
+		ui.List();
+
+		string outputStr = stringOutput.str();
+
+		BOOST_CHECK_EQUAL(expected.str(), outputStr.substr(0, outputStr.size() - 25));
+	}
+
 	// может выполнять команду SetTitle
 	BOOST_AUTO_TEST_CASE(can_perform_set_title_command)
 	{

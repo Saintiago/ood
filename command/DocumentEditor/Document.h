@@ -23,7 +23,6 @@ public:
 
 	void AddAndExecuteCommand(ICommandPtr && command);
 
-	void ResizeImage(size_t position, int width, int height);
 	void DeleteItem(size_t index);
 
 	bool CanUndo() const override;	

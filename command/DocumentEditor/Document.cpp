@@ -108,20 +108,6 @@ void CDocument::AddAndExecuteCommand(ICommandPtr && command)
 	m_history.AddAndExecuteCommand(move(command));
 }
 
-void CDocument::ResizeImage(size_t position, int width, int height)
-{
-	if (m_storage.GetSize() <= position)
-	{
-		throw out_of_range("There is no image at " + position);
-	}
-	shared_ptr<IImage> image = m_storage.GetItem(position)->GetImage();
-	if (image == nullptr)
-	{
-		throw out_of_range("There is no image at " + position);
-	}
-	m_history.AddAndExecuteCommand(make_unique<CResizeImageCommand>(image, width, height));
-}
-
 void CDocument::DeleteItem(size_t index)
 {
 	m_history.AddAndExecuteCommand(make_unique<CDeleteItemCommand>(m_storage, index));
@@ -129,6 +115,11 @@ void CDocument::DeleteItem(size_t index)
 
 void CDocument::Save(const Path& baseDir)const
 {
+	if (!fs::exists(baseDir))
+	{
+		fs::create_directory(baseDir);
+	}
+
 	Path imagesDir = baseDir / "images";
 	Path indexPath = baseDir / "index.html";
 	

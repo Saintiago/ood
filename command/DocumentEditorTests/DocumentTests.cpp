@@ -133,24 +133,6 @@ BOOST_FIXTURE_TEST_SUITE(Document, Document_)
 
 	}
 
-	// Изменяет размер изображения, находящегося в указанной позиции документа
-	BOOST_AUTO_TEST_CASE(can_resize_image_at_specified_position)
-	{
-		int widthBefore = 50;
-		int heightBefore = 100;
-		document.InsertImage(fs::current_path() / "source\\image.png", widthBefore, heightBefore);
-		BOOST_CHECK_EQUAL(widthBefore, document.GetItem(0)->GetImage()->GetWidth());
-		BOOST_CHECK_EQUAL(heightBefore, document.GetItem(0)->GetImage()->GetHeight());
-
-		int widthAfter = 200;
-		int heightAfter = 300;
-		document.ResizeImage(0, widthAfter, heightAfter);
-		BOOST_CHECK_EQUAL(widthAfter, document.GetItem(0)->GetImage()->GetWidth());
-		BOOST_CHECK_EQUAL(heightAfter, document.GetItem(0)->GetImage()->GetHeight());
-
-		BOOST_CHECK_THROW(document.ResizeImage(1, widthAfter, heightAfter), out_of_range);
-	}
-
 	// можно удалить элемент в заданной позиции
 	BOOST_AUTO_TEST_CASE(can_delete_element_at_specified_position)
 	{
