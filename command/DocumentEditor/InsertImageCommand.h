@@ -6,6 +6,9 @@ class CInsertImageCommand :
 	public CAbstractCommand
 {
 public:
+	static string imagesDirName;
+	static Path imagePathTemplate;
+
 	CInsertImageCommand(CDocumentStorage& m_target, int width, int height, Path path, boost::optional<size_t> position);
 	~CInsertImageCommand() = default;
 
@@ -19,9 +22,6 @@ private:
 	Path m_path;
 	size_t m_position;
 	shared_ptr<IImage> m_image;
-
-	string m_imagesDirName = "images";
-	Path m_imagePathTemplate = { Path(m_imagesDirName) / "image_%%%%" };
 
 	Path GetRelativeImagePath(Path source);
 };

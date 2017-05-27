@@ -4,6 +4,9 @@
 
 namespace fs = boost::filesystem;
 
+string CInsertImageCommand::imagesDirName = "images";
+Path CInsertImageCommand::imagePathTemplate = { Path(CInsertImageCommand::imagesDirName) / "image_%%%%" };
+
 CInsertImageCommand::CInsertImageCommand(CDocumentStorage& target, int width, int height, Path path, boost::optional<size_t> position)
 	: m_target(target)
 	, m_width(width)
@@ -15,7 +18,7 @@ CInsertImageCommand::CInsertImageCommand(CDocumentStorage& target, int width, in
 		m_position = position.get();
 	}
 
-	Path imagesDir = fs::current_path() / m_imagesDirName;
+	Path imagesDir = fs::current_path() / imagesDirName;
 	if (!fs::exists(imagesDir))
 	{
 		fs::create_directory(imagesDir);
@@ -40,7 +43,7 @@ void CInsertImageCommand::DoUnexecute()
 
 Path CInsertImageCommand::GetRelativeImagePath(Path source)
 {
-	Path uniquePath = fs::unique_path(m_imagePathTemplate);
+	Path uniquePath = fs::unique_path(imagePathTemplate);
 	string extension = fs::extension(source);
 	return { uniquePath.string() + extension };
 }
