@@ -1,4 +1,3 @@
-export enum harmonicFunctionType
-{
+export enum harmonicFunctionType {
     Sin, Cos
 }

@@ -1,7 +1,7 @@
 import Harmonic from './Harmonic';
 import {harmonicFunctionType} from '../constants/harmonicFunctionType';
 
-it('can be instantiated', () => {
+it('can be constructed', () => {
     new Harmonic(1, 1, 1, harmonicFunctionType.Sin);
 });
 

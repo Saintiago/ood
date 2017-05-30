@@ -1,5 +1,3 @@
-//import * as React from 'react';
-
 import {harmonicFunctionType} from '../constants/harmonicFunctionType';
 
 export default class Harmonic {
@@ -13,14 +11,16 @@ export default class Harmonic {
         return this.amplitude * this.getHarmonicFunction(this.frequency * x + this.phase);
     }
 
-    private getHarmonicFunction(arg: number){
-        switch (this.harmonicFunction)
-        {
+    private getHarmonicFunction(arg: number) {
+        switch (this.harmonicFunction) {
             case harmonicFunctionType.Sin: {
                 return Math.sin(arg);
             }
             case harmonicFunctionType.Cos: {
                 return Math.cos(arg);
+            }
+            default: {
+                throw Error('Unknown harmonic function');
             }
         }
     }
