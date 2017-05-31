@@ -3,11 +3,40 @@ import Harmonic from './Harmonic';
 import {harmonicFunctionType} from '../constants/harmonicFunctionType';
 
 function HarmonicString(props: any) {
+
+    let getHarmonicFunctionString = function (type: harmonicFunctionType) {
+        if (type === harmonicFunctionType.Sin) {
+            return 'sin';
+        }
+        if (type === harmonicFunctionType.Cos) {
+            return 'cos';
+        }
+        throw new Error('Unknown harmonic function: ' + type);
+    };
+
+    let prependPlusIfPositive = function (x: number): string {
+        return (x >= 0) ? ' + ' + x : ' ' + x;
+    };
+
+    let formatMultiplier = function(x: number): string {
+        if (x === 1) {
+            return '';
+        }
+        if (x === -1) {
+            return '-';
+        }
+        return String(x);
+    };
+
     let h = props.harmonic;
+    let equationString = '%amplitude%%harmonic%(%frequency%x%phase%)';
+    equationString = equationString.replace('%amplitude%', formatMultiplier(h.amplitude))
+                                   .replace('%harmonic%', getHarmonicFunctionString(h.harmonicFunction))
+                                   .replace('%frequency%', formatMultiplier(h.frequency))
+                                   .replace('%phase%', prependPlusIfPositive(h.phase));
+
     return (
-        <li>
-            {h.amplitude} * {getHarmonicFunctionString(h.harmonicFunction)}({h.frequency}x{prependPlusIfPositive(h.phase)})
-        </li>
+        <li>{equationString}</li>
     );
 }
 
@@ -23,16 +52,16 @@ export default class HarmonicsList extends React.Component<any, any> {
 
         this.state = {
             harmonics: harmonicsList
-        }
+        };
     }
 
     renderHarmonic(i: number) {
         return (
-            <HarmonicString harmonic={this.state.harmonics[i]} />
+            <HarmonicString key={i} harmonic={this.state.harmonics[i]} />
         );
     }
 
-    renderHarmonicsList(){
+    renderHarmonicsList() {
         let rows = [];
         for (let i = 0; i < this.state.harmonics.length; ++i) {
             rows.push(this.renderHarmonic(i));
@@ -51,25 +80,4 @@ export default class HarmonicsList extends React.Component<any, any> {
             </div>
         );
     }
-}
-
-function getHarmonicFunctionString(type: harmonicFunctionType)
-{
-    if (type === harmonicFunctionType.Sin)
-    {
-        return "sin";
-    }
-    else if (type === harmonicFunctionType.Cos)
-    {
-        return "cos";
-    }
-    else
-    {
-        throw new Error('Unknown harmonic function: ' + type);
-    }
-}
-
-function prependPlusIfPositive(x: number): string
-{
-    return (x >= 0) ? " + " + x : " " + x;
 }
