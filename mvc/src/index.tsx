@@ -4,7 +4,7 @@ import * as ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
-import HarmonicsList from './components/HarmonicsList';
+import ChartDrawer from './components/ChartDrawer';
 
 /*
 import Hello from './containers/Hello';
@@ -27,7 +27,7 @@ ReactDOM.render(
 );*/
 
 ReactDOM.render(
-    <HarmonicsList />,
+    <ChartDrawer />,
     document.getElementById('root') as HTMLElement
 );
 

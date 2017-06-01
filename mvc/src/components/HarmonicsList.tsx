@@ -1,83 +1,34 @@
 import * as React from 'react';
+import HarmonicString from './HarmonicString';
 import Harmonic from './Harmonic';
-import {harmonicFunctionType} from '../constants/harmonicFunctionType';
 
-function HarmonicString(props: any) {
-
-    let getHarmonicFunctionString = function (type: harmonicFunctionType) {
-        if (type === harmonicFunctionType.Sin) {
-            return 'sin';
-        }
-        if (type === harmonicFunctionType.Cos) {
-            return 'cos';
-        }
-        throw new Error('Unknown harmonic function: ' + type);
-    };
-
-    let prependPlusIfPositive = function (x: number): string {
-        return (x >= 0) ? ' + ' + x : ' ' + x;
-    };
-
-    let formatMultiplier = function(x: number): string {
-        if (x === 1) {
-            return '';
-        }
-        if (x === -1) {
-            return '-';
-        }
-        return String(x);
-    };
-
-    let h = props.harmonic;
-    let equationString = '%amplitude%%harmonic%(%frequency%x%phase%)';
-    equationString = equationString.replace('%amplitude%', formatMultiplier(h.amplitude))
-                                   .replace('%harmonic%', getHarmonicFunctionString(h.harmonicFunction))
-                                   .replace('%frequency%', formatMultiplier(h.frequency))
-                                   .replace('%phase%', prependPlusIfPositive(h.phase));
-
-    return (
-        <li>{equationString}</li>
-    );
+interface HarmonicsListProps {
+    harmonics: Harmonic[];
 }
 
-export default class HarmonicsList extends React.Component<any, any> {
-    constructor() {
-        super();
+export default function HarmonicsList(props: HarmonicsListProps) {
 
-        let harmonicsList = [] as Harmonic[];
-
-        harmonicsList.push(new Harmonic(4.5, 23, -1, harmonicFunctionType.Sin));
-        harmonicsList.push(new Harmonic(-11, 4, 1, harmonicFunctionType.Cos));
-        harmonicsList.push(new Harmonic(1, 1, 3, harmonicFunctionType.Sin));
-
-        this.state = {
-            harmonics: harmonicsList
-        };
-    }
-
-    renderHarmonic(i: number) {
+    let renderHarmonic = function(i: number) {
         return (
-            <HarmonicString key={i} harmonic={this.state.harmonics[i]} />
+            <HarmonicString key={i} harmonic={props.harmonics[i]} />
         );
-    }
+    };
 
-    renderHarmonicsList() {
+    let renderHarmonicsList = function() {
         let rows = [];
-        for (let i = 0; i < this.state.harmonics.length; ++i) {
-            rows.push(this.renderHarmonic(i));
+        for (let i = 0; i < props.harmonics.length; ++i) {
+            rows.push(renderHarmonic(i));
         }
         return (
                 <ul className="harmonic_list">
                     {rows}
                 </ul>
         );
-    }
+    };
 
-    render() {
-        return (
-            <div className="harmonic_list_wrapper">
-                {this.renderHarmonicsList()}
-            </div>
-        );
-    }
+    return (
+        <div className="harmonic_list_wrapper">
+            {renderHarmonicsList()}
+        </div>
+    );
 }
