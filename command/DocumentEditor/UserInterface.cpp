@@ -62,7 +62,7 @@ void CUserInterface::ExecuteCommand(const string & commandLine)
 		}
 	}
 
-	if (command == "InsertImage")
+	else if (command == "InsertImage")
 	{
 		string index = PopFront(params);
 		int width = stoi(PopFront(params));
