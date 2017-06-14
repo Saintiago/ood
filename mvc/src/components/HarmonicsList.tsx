@@ -4,7 +4,7 @@ import Harmonic from './Harmonic';
 
 interface HarmonicsListProps {
     harmonics: Harmonic[];
-    selected: number
+    selected: number;
 }
 
 export default function HarmonicsList(props: HarmonicsListProps) {

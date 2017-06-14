@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Harmonic from './Harmonic';
 import HarmonicsList from './HarmonicsList';
+import HarmonicsDetailed from './HarmonicDetailed';
 import {harmonicFunctionType} from '../constants/harmonicFunctionType';
 
 interface HarmonicListState {
@@ -25,9 +26,13 @@ export default class ChartDrawer extends React.Component<{}, HarmonicListState> 
     }
 
     render() {
+
+        let selectedHarmonic = this.state.harmonics[this.state.selectedHarmonic];
+
         return (
             <div className="harmonics_list_wrapper">
-                <HarmonicsList harmonics={this.state.harmonics} />
+                <HarmonicsList harmonics={this.state.harmonics} selected={this.state.selectedHarmonic} />
+                <HarmonicsDetailed harmonic={selectedHarmonic} />
             </div>
         );
     }
