@@ -6,7 +6,7 @@ import {harmonicFunctionType} from '../constants/harmonicFunctionType';
 
 interface HarmonicListState {
     harmonics: Harmonic[];
-    selectedHarmonic: number;
+    selectedHarmonicIndex?: number;
 }
 
 export default class ChartDrawer extends React.Component<{}, HarmonicListState> {
@@ -21,17 +21,16 @@ export default class ChartDrawer extends React.Component<{}, HarmonicListState> 
 
         this.state = {
             harmonics: harmonicsList,
-            selectedHarmonic: 0
+            selectedHarmonicIndex: 0
         };
     }
 
     render() {
-
-        let selectedHarmonic = this.state.harmonics[this.state.selectedHarmonic];
-
+        const { harmonics, selectedHarmonicIndex = 0 } = this.state;
+        let selectedHarmonic = harmonics[selectedHarmonicIndex];
         return (
             <div className="harmonics_list_wrapper">
-                <HarmonicsList harmonics={this.state.harmonics} selected={this.state.selectedHarmonic} />
+                <HarmonicsList harmonics={harmonics} selected={selectedHarmonicIndex} />
                 <HarmonicsDetailed harmonic={selectedHarmonic} />
             </div>
         );

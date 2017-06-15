@@ -3,21 +3,23 @@ import {harmonicFunctionType} from '../constants/harmonicFunctionType';
 import Harmonic from './Harmonic';
 
 export interface HarmonicStringProps {
+    key: number;
     harmonic: Harmonic;
     selected: boolean;
+    onSelectHarmonic?: () => void;
+}
+
+export function getHarmonicFunctionString(type: harmonicFunctionType) {
+    if (type === harmonicFunctionType.Sin) {
+        return 'sin';
+    }
+    if (type === harmonicFunctionType.Cos) {
+        return 'cos';
+    }
+    throw new Error('Unknown harmonic function: ' + type);
 }
 
 export default function HarmonicString(props: HarmonicStringProps) {
-
-    let getHarmonicFunctionString = (type: harmonicFunctionType) => {
-        if (type === harmonicFunctionType.Sin) {
-            return 'sin';
-        }
-        if (type === harmonicFunctionType.Cos) {
-            return 'cos';
-        }
-        throw new Error('Unknown harmonic function: ' + type);
-    };
 
     let prependPlusIfPositive = (x: number): string => {
         return (x >= 0) ? ' + ' + x : ' ' + x;
@@ -43,6 +45,6 @@ export default function HarmonicString(props: HarmonicStringProps) {
         .replace('%phase%', prependPlusIfPositive(h.phase));
 
     return (
-        <li className={selected}>{equationString}</li>
+        <li onClick={props.onSelectHarmonic} className={selected}>{equationString}</li>
     );
 }
