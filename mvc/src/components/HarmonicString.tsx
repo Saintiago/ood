@@ -3,10 +3,10 @@ import {harmonicFunctionType} from '../constants/harmonicFunctionType';
 import Harmonic from './Harmonic';
 
 export interface HarmonicStringProps {
-    key: number;
+    index: number;
     harmonic: Harmonic;
     selected: boolean;
-    onSelectHarmonic?: () => void;
+    onSelectHarmonic: (index: number) => void;
 }
 
 export function getHarmonicFunctionString(type: harmonicFunctionType) {
@@ -19,7 +19,7 @@ export function getHarmonicFunctionString(type: harmonicFunctionType) {
     throw new Error('Unknown harmonic function: ' + type);
 }
 
-export default function HarmonicString(props: HarmonicStringProps) {
+export default function HarmonicString({index, harmonic, selected, onSelectHarmonic}: HarmonicStringProps) {
 
     let prependPlusIfPositive = (x: number): string => {
         return (x >= 0) ? ' + ' + x : ' ' + x;
@@ -35,8 +35,8 @@ export default function HarmonicString(props: HarmonicStringProps) {
         return String(x);
     };
 
-    let selected = props.selected ? 'selected' : '';
-    let h = props.harmonic;
+    let selectedClass = selected ? 'selected' : '';
+    let h = harmonic;
     let equationString = '%amplitude%%harmonic%(%frequency%x%phase%)';
 
     equationString = equationString.replace('%amplitude%', formatMultiplier(h.amplitude))
@@ -45,6 +45,6 @@ export default function HarmonicString(props: HarmonicStringProps) {
         .replace('%phase%', prependPlusIfPositive(h.phase));
 
     return (
-        <li onClick={props.onSelectHarmonic} className={selected}>{equationString}</li>
+        <li onClick={() => onSelectHarmonic(index)} className={selectedClass}>{equationString}</li>
     );
 }

@@ -5,20 +5,27 @@ import Harmonic from './Harmonic';
 interface HarmonicsListProps {
     harmonics: Harmonic[];
     selected: number;
+    onSelectHarmonic: (index: number) => void;
 }
 
-export default function HarmonicsList(props: HarmonicsListProps) {
+export default function HarmonicsList({harmonics, selected, onSelectHarmonic}: HarmonicsListProps) {
 
     let renderHarmonic = function(i: number) {
-        let isSelected = (i === props.selected);
+        let isSelected = (i === selected);
         return (
-            <HarmonicString key={i} harmonic={props.harmonics[i]} selected={isSelected} />
+            <HarmonicString
+                onSelectHarmonic={onSelectHarmonic}
+                index={i}
+                key={i}
+                harmonic={harmonics[i]}
+                selected={isSelected}
+            />
         );
     };
 
     let renderHarmonicsList = function() {
         let rows = [];
-        for (let i = 0; i < props.harmonics.length; ++i) {
+        for (let i = 0; i < harmonics.length; ++i) {
             rows.push(renderHarmonic(i));
         }
         return (

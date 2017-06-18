@@ -7,7 +7,16 @@ export default class Harmonic {
                 public harmonicFunction: harmonicFunctionType) {
     }
 
-    public getY(x: number) {
+    public getData(xValues: number[]) {
+        let data: {x: number, y: number}[] = [];
+        for (let x of xValues) {
+            let y = this.getY(x);
+            data.push({x, y});
+        }
+        return data;
+    }
+
+    getY = (x: number): number => {
         return this.amplitude * this.getHarmonicFunction(this.frequency * x + this.phase);
     }
 

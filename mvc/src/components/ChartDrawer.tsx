@@ -2,37 +2,40 @@ import * as React from 'react';
 import Harmonic from './Harmonic';
 import HarmonicsList from './HarmonicsList';
 import HarmonicsDetailed from './HarmonicDetailed';
-import {harmonicFunctionType} from '../constants/harmonicFunctionType';
+import AddHarmonicDialog from './AddHarmonicDialog';
+import HarmonicLineChart from './HarmonicLineChart';
 
-interface HarmonicListState {
+interface ChardDrawerProps {
     harmonics: Harmonic[];
-    selectedHarmonicIndex?: number;
+    tmpHarmonic: Harmonic;
+    selected: number;
+    addDialogVisible: boolean;
+    onSelectHarmonic: (index: number) => void;
+    onAddDialogClicked: () => void;
+    onAddClicked: () => void;
+    onCancelClicked: () => void;
+    onAddHarmonicChange: (newHarmonic: Harmonic) => void;
 }
 
-export default class ChartDrawer extends React.Component<{}, HarmonicListState> {
-    constructor() {
-        super();
-
-        let harmonicsList = [] as Harmonic[];
-
-        harmonicsList.push(new Harmonic(4.5, 23, -1, harmonicFunctionType.Sin));
-        harmonicsList.push(new Harmonic(-11, 4, 1, harmonicFunctionType.Cos));
-        harmonicsList.push(new Harmonic(1, 1, 3, harmonicFunctionType.Sin));
-
-        this.state = {
-            harmonics: harmonicsList,
-            selectedHarmonicIndex: 0
-        };
-    }
-
-    render() {
-        const { harmonics, selectedHarmonicIndex = 0 } = this.state;
-        let selectedHarmonic = harmonics[selectedHarmonicIndex];
-        return (
-            <div className="harmonics_list_wrapper">
-                <HarmonicsList harmonics={harmonics} selected={selectedHarmonicIndex} />
-                <HarmonicsDetailed harmonic={selectedHarmonic} />
-            </div>
-        );
-    }
+export default function ChartDrawer (props: ChardDrawerProps )  {
+    let selectedHarmonic = props.harmonics[props.selected];
+    return (
+        <div className="harmonics_list_wrapper">
+            <HarmonicsList
+                onSelectHarmonic={props.onSelectHarmonic}
+                harmonics={props.harmonics}
+                selected={props.selected}
+            />
+            <button onClick={props.onAddDialogClicked}>Add Harmonic</button>
+            <AddHarmonicDialog
+                onAddClicked={props.onAddClicked}
+                onCancelClicked={props.onCancelClicked}
+                visible={props.addDialogVisible}
+                tmpHarmonic={props.tmpHarmonic}
+                onHarmonicChange={props.onAddHarmonicChange}
+            />
+            <HarmonicsDetailed name="show" readonly={true} harmonic={selectedHarmonic} />
+            <HarmonicLineChart data={selectedHarmonic.getData([0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5])} />
+        </div>
+    );
 }
