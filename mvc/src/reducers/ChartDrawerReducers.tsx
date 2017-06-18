@@ -34,13 +34,3 @@ export function selectHarmonic(state: ChartDrawerState, action: ChartDrawerActio
             return state;
     }
 }
-
-/*
- todos: [
- ...state.todos,
- {
- text: action.text,
- completed: false
- }
- ]
- */
