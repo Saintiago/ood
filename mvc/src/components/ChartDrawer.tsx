@@ -5,6 +5,7 @@ import HarmonicsDetailed from './HarmonicDetailed';
 import AddHarmonicDialog from './AddHarmonicDialog';
 import HarmonicLineChart from './HarmonicLineChart';
 import HarmonicTableChart from './HarmonicTableChart';
+import {RaisedButton} from 'material-ui';
 
 interface ChardDrawerProps {
     harmonics: Harmonic[];
@@ -45,8 +46,8 @@ export default function ChartDrawer (props: ChardDrawerProps )  {
                 harmonics={props.harmonics}
                 selected={props.selected}
             />
-            <button onClick={props.onAddDialogClicked}>Add New</button>
-            <button onClick={() => {props.onDeleteClicked(props.selected); }}>Delete Selected</button>
+            <RaisedButton onClick={props.onAddDialogClicked} label="Add New" />
+            <RaisedButton onClick={() => {props.onDeleteClicked(props.selected); }} label="Delete Selected" />
             <AddHarmonicDialog
                 onAddClicked={props.onAddClicked}
                 onCancelClicked={props.onCancelClicked}

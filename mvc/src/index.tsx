@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import {MuiThemeProvider} from 'material-ui';
 
 import './index.css';
 
@@ -27,8 +28,10 @@ const store = createStore<ChartDrawerState>(selectHarmonic, {
 });
 
 ReactDOM.render(
+    <MuiThemeProvider>
     <Provider store={store}>
         <ChartDrawerContainer />
-    </Provider>,
+    </Provider>
+    </MuiThemeProvider>,
     document.getElementById('root') as HTMLElement
 );
