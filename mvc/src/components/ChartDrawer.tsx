@@ -13,12 +13,29 @@ interface ChardDrawerProps {
     addDialogVisible: boolean;
     onSelectHarmonic: (index: number) => void;
     onAddDialogClicked: () => void;
+    onDeleteClicked: (index: number) => void;
     onAddClicked: () => void;
     onCancelClicked: () => void;
     onAddHarmonicChange: (newHarmonic: Harmonic) => void;
 }
 
 export default function ChartDrawer (props: ChardDrawerProps )  {
+
+    if (props.harmonics.length === 0) {
+        return (
+            <div className="harmonics_list_wrapper">
+                <button onClick={props.onAddDialogClicked}>Add New</button>
+                <AddHarmonicDialog
+                    onAddClicked={props.onAddClicked}
+                    onCancelClicked={props.onCancelClicked}
+                    visible={props.addDialogVisible}
+                    tmpHarmonic={props.tmpHarmonic}
+                    onHarmonicChange={props.onAddHarmonicChange}
+                />
+            </div>
+        );
+    }
+
     let selectedHarmonic = props.harmonics[props.selected];
     let chartData = selectedHarmonic.getData([0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5]);
     return (
@@ -28,7 +45,8 @@ export default function ChartDrawer (props: ChardDrawerProps )  {
                 harmonics={props.harmonics}
                 selected={props.selected}
             />
-            <button onClick={props.onAddDialogClicked}>Add Harmonic</button>
+            <button onClick={props.onAddDialogClicked}>Add New</button>
+            <button onClick={() => {props.onDeleteClicked(props.selected); }}>Delete Selected</button>
             <AddHarmonicDialog
                 onAddClicked={props.onAddClicked}
                 onCancelClicked={props.onCancelClicked}

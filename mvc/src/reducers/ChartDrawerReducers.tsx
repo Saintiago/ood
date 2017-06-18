@@ -17,10 +17,19 @@ export function selectHarmonic(state: ChartDrawerState, action: ChartDrawerActio
                     state.tmpHarmonic
                 ],
                 tmpHarmonic: new Harmonic(0, 0, 0, harmonicFunctionType.Sin),
-                addDialogVisible: false
+                addDialogVisible: false,
+                selectedHarmonic: state.harmonics.length
             };
         case event.ADD_HARMONIC_CHANGE:
             return { ...state, tmpHarmonic: action.harmonic };
+        case event.DELETE_HARMONIC:
+            let harmonics = state.harmonics;
+            delete harmonics[action.index];
+            return {
+                ...state,
+                harmonics: harmonics.filter(n => n),
+                selectedHarmonic: Math.max(0, state.selectedHarmonic - 1)
+            };
         default:
             return state;
     }

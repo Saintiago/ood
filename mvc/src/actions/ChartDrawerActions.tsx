@@ -10,6 +10,11 @@ export interface AddHarmonic {
     type: constants.ADD_HARMONIC;
 }
 
+export interface DeleteHarmonic {
+    type: constants.DELETE_HARMONIC;
+    index: number;
+}
+
 export interface ToggleAddDialog {
     type: constants.TOGGLE_ADD_DIALOG;
 }
@@ -19,7 +24,7 @@ export interface AddHarmonicChange {
     harmonic: Harmonic;
 }
 
-export type ChartDrawerAction = SelectHarmonic | ToggleAddDialog | AddHarmonic | AddHarmonicChange;
+export type ChartDrawerAction = SelectHarmonic | ToggleAddDialog | AddHarmonic | AddHarmonicChange | DeleteHarmonic;
 
 export function selectHarmonic(index: number): SelectHarmonic {
     return {
@@ -31,6 +36,13 @@ export function selectHarmonic(index: number): SelectHarmonic {
 export function addHarmonic(): AddHarmonic {
     return {
         type: constants.ADD_HARMONIC
+    };
+}
+
+export function deleteHarmonic(index: number): DeleteHarmonic {
+    return {
+        type: constants.DELETE_HARMONIC,
+        index
     };
 }
 
