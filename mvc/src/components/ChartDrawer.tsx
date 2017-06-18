@@ -4,6 +4,7 @@ import HarmonicsList from './HarmonicsList';
 import HarmonicsDetailed from './HarmonicDetailed';
 import AddHarmonicDialog from './AddHarmonicDialog';
 import HarmonicLineChart from './HarmonicLineChart';
+import HarmonicTableChart from './HarmonicTableChart';
 
 interface ChardDrawerProps {
     harmonics: Harmonic[];
@@ -19,6 +20,7 @@ interface ChardDrawerProps {
 
 export default function ChartDrawer (props: ChardDrawerProps )  {
     let selectedHarmonic = props.harmonics[props.selected];
+    let chartData = selectedHarmonic.getData([0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5]);
     return (
         <div className="harmonics_list_wrapper">
             <HarmonicsList
@@ -35,7 +37,8 @@ export default function ChartDrawer (props: ChardDrawerProps )  {
                 onHarmonicChange={props.onAddHarmonicChange}
             />
             <HarmonicsDetailed name="show" readonly={true} harmonic={selectedHarmonic} />
-            <HarmonicLineChart data={selectedHarmonic.getData([0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5])} />
+            <HarmonicLineChart data={chartData} />
+            <HarmonicTableChart data={chartData} />
         </div>
     );
 }
