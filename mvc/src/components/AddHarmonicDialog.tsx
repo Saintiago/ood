@@ -1,6 +1,7 @@
 import * as React from 'react';
 import HarmonicDetailed from './HarmonicDetailed';
 import Harmonic from './Harmonic';
+import { Dialog, FlatButton } from 'material-ui';
 
 interface AddHarmonicDialogProps {
     visible: boolean;
@@ -11,19 +12,40 @@ interface AddHarmonicDialogProps {
 }
 
 export default function AddHarmonicDialog(props: AddHarmonicDialogProps) {
-    let addHarmonicDialogStyle = {
-        display: (props.visible) ? 'initial' : 'none'
+
+    const actions = [
+        <FlatButton
+            label="Cancel"
+            primary={false}
+            onClick={props.onCancelClicked}
+        />,
+        <FlatButton
+            label="Add"
+            primary={true}
+            keyboardFocused={true}
+            onClick={props.onAddClicked}
+        />,
+    ];
+
+    const customContentStyle = {
+        width: 400
     };
+
     return  (
-        <div className="add_harmonic_dialog" style={addHarmonicDialogStyle}>
+        <Dialog
+            title="Add New harmonic function"
+            actions={actions}
+            modal={false}
+            open={props.visible}
+            contentStyle={customContentStyle}
+            onRequestClose={props.onCancelClicked}
+        >
             <HarmonicDetailed
                 name="add"
                 readonly={false}
                 harmonic={props.tmpHarmonic}
                 onHarmonicChange={props.onHarmonicChange}
             />
-            <button onClick={props.onAddClicked}>Add</button>
-            <button onClick={props.onCancelClicked}>Cancel</button>
-        </div>
+        </Dialog>
     );
 }

@@ -12,3 +12,6 @@ export type TOGGLE_ADD_DIALOG = typeof TOGGLE_ADD_DIALOG;
 
 export const ADD_HARMONIC_CHANGE = 'ADD_HARMONIC_CHANGE';
 export type ADD_HARMONIC_CHANGE = typeof ADD_HARMONIC_CHANGE;
+
+export const SELECT_TAB = 'SELECT_TAB';
+export type SELECT_TAB = typeof SELECT_TAB;

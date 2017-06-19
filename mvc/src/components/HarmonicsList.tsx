@@ -1,6 +1,7 @@
 import * as React from 'react';
-import HarmonicString from './HarmonicString';
 import Harmonic from './Harmonic';
+import {harmonicFunctionType} from '../constants/harmonicFunctionType';
+import {List, ListItem, makeSelectable} from 'material-ui';
 
 interface HarmonicsListProps {
     harmonics: Harmonic[];
@@ -11,14 +12,11 @@ interface HarmonicsListProps {
 export default function HarmonicsList({harmonics, selected, onSelectHarmonic}: HarmonicsListProps) {
 
     let renderHarmonic = function(i: number) {
-        let isSelected = (i === selected);
         return (
-            <HarmonicString
-                onSelectHarmonic={onSelectHarmonic}
-                index={i}
-                key={i}
-                harmonic={harmonics[i]}
-                selected={isSelected}
+            <ListItem
+                value={i}
+                primaryText={getHarmonicString(harmonics[i])}
+                onClick={() => onSelectHarmonic(i)}
             />
         );
     };
@@ -28,16 +26,51 @@ export default function HarmonicsList({harmonics, selected, onSelectHarmonic}: H
         for (let i = 0; i < harmonics.length; ++i) {
             rows.push(renderHarmonic(i));
         }
-        return (
-            <ul className="harmonic_list">
-                {rows}
-            </ul>
-        );
+        return rows;
     };
 
+    let SelectableList = makeSelectable(List);
+
     return (
-        <div className="harmonic_list_wrapper">
+        <SelectableList value={selected}>
             {renderHarmonicsList()}
-        </div>
+        </SelectableList>
     );
+}
+
+function getHarmonicFunctionString(type: harmonicFunctionType) {
+    if (type === harmonicFunctionType.Sin) {
+        return 'sin';
+    }
+    if (type === harmonicFunctionType.Cos) {
+        return 'cos';
+    }
+    throw new Error('Unknown harmonic function: ' + type);
+}
+
+function getHarmonicString(harmonic: Harmonic) {
+
+    let prependPlusIfPositive = (x: number): string => {
+        return (x >= 0) ? ' + ' + x : ' ' + x;
+    };
+
+    let formatMultiplier = (x: number): string => {
+        if (x === 1) {
+            return '';
+        }
+        if (x === -1) {
+            return '-';
+        }
+        return String(x);
+    };
+
+    let h = harmonic;
+    let equationString = '%amplitude%%harmonic%(%frequency%x%phase%)';
+
+    equationString = equationString.replace('%amplitude%', formatMultiplier(h.amplitude))
+        .replace('%harmonic%', getHarmonicFunctionString(h.harmonicFunction))
+        .replace('%frequency%', formatMultiplier(h.frequency))
+        .replace('%phase%', prependPlusIfPositive(h.phase));
+
+    return equationString;
 }

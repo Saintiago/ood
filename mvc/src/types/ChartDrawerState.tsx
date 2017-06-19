@@ -5,4 +5,5 @@ export interface ChartDrawerState {
     tmpHarmonic: Harmonic;
     selectedHarmonic: number;
     addDialogVisible: boolean;
+    tabSelected: string;
 }

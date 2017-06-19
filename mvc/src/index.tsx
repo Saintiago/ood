@@ -14,6 +14,9 @@ import { Provider } from 'react-redux';
 import Harmonic from './components/Harmonic';
 import {harmonicFunctionType} from './constants/harmonicFunctionType';
 
+let injectTapEventPlugin = require("react-tap-event-plugin");
+injectTapEventPlugin();
+
 let harmonicsList = [] as Harmonic[];
 
 harmonicsList.push(new Harmonic(4.5, 23, -1, harmonicFunctionType.Sin));
@@ -24,7 +27,8 @@ const store = createStore<ChartDrawerState>(selectHarmonic, {
     harmonics: harmonicsList,
     tmpHarmonic: new Harmonic(0, 0, 0, harmonicFunctionType.Sin),
     selectedHarmonic: 0,
-    addDialogVisible: false
+    addDialogVisible: false,
+    tabSelected: 'line'
 });
 
 ReactDOM.render(

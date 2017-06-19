@@ -2,6 +2,7 @@ import * as React from 'react';
 import {harmonicFunctionType} from '../constants/harmonicFunctionType';
 import Harmonic from './Harmonic';
 import {getHarmonicFunctionString} from './HarmonicString';
+import {Paper, TextField, RadioButton, RadioButtonGroup} from 'material-ui';
 
 export interface HarmonicDetailedProps {
     harmonic: Harmonic;
@@ -41,8 +42,8 @@ export default function HarmonicDetailed(props: HarmonicDetailedProps) {
         onHarmonicChange(localHarmonic);
     };
 
-    let handleHFunctionChange = (e: React.FormEvent<HTMLInputElement>) => {
-        localHarmonic.harmonicFunction = (e.currentTarget.value === 'Sin')
+    let handleHFunctionChange = (value: string) => {
+        localHarmonic.harmonicFunction = (value === 'Sin')
             ? harmonicFunctionType.Sin
             : harmonicFunctionType.Cos;
         onHarmonicChange(localHarmonic);
@@ -52,36 +53,30 @@ export default function HarmonicDetailed(props: HarmonicDetailedProps) {
         { label, value, onChange }: {label: string; value: number; onChange: (value: number) => void;  }
         ) {
         return (
-            <li>
-                <label >{label}</label>
-                <input
-                    type="number"
-                    defaultValue={value.toString()}
-                    readOnly={props.readonly}
-                    onChange={e => onChange(Number(e.currentTarget.value))}
-                />
-            </li>
+            <TextField
+                readOnly={props.readonly}
+                hintText={label}
+                defaultValue={value.toString()}
+                floatingLabelText={label}
+                onChange={(e: React.FormEvent<HTMLInputElement>, newValue: string) => onChange(Number(newValue))}
+            />
         );
     }
 
     function RadioButtons(
-        {radios, onChange}: { radios: RadioChoice[]; onChange: (e: React.FormEvent<HTMLInputElement>) => void; }
+        {radios, onChange}: { radios: RadioChoice[]; onChange: (newValue: string) => void; }
         ) {
 
         let renderRadio = (i: number) => {
             let radio = radios[i];
             return (
-                <span key={i}>
-                <input
-                    name={props.name + 'RadioButtons'}
-                    type="radio"
-                    value={radio.value}
-                    defaultChecked={radio.checked}
-                    disabled={props.readonly}
-                    onChange={e => onChange(e)}
-                />
-                <label>{radio.label}</label>
-            </span>
+            <RadioButton
+                style={{display: 'inline-block'}}
+                value={radio.value}
+                label={radio.label}
+                disabled={props.readonly}
+                onChange={(e: React.FormEvent<HTMLInputElement>, newValue: string) => onChange(newValue)}
+            />
             );
         };
 
@@ -91,18 +86,26 @@ export default function HarmonicDetailed(props: HarmonicDetailedProps) {
         }
 
         return (
-            <li>
+            <RadioButtonGroup name={props.name + 'RadioButtons'} valueSelected={getHarmonicFunctionString(props.harmonic.harmonicFunction)}>
                 {radioChoices}
-            </li>
+            </RadioButtonGroup>
         );
     }
 
+    const style = {
+        width: 300,
+        margin: 20,
+        padding: 20,
+        textAlign: 'left',
+        display: 'inline-block',
+    };
+
     return (
-        <ul className="harmonic_detailed">
+        <Paper style={style} zDepth={1} >
             <LabelledProperty label="amplitude" value={props.harmonic.amplitude} onChange={handleAmplitudeChange} />
             <RadioButtons radios={radiosArray} onChange={handleHFunctionChange} />
             <LabelledProperty label="frequency" value={props.harmonic.frequency} onChange={handleFrequencyChange} />
             <LabelledProperty label="phase" value={props.harmonic.phase} onChange={handlePhaseChange} />
-        </ul>
+        </Paper>
     );
 }

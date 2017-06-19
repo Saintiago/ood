@@ -10,6 +10,8 @@ export function selectHarmonic(state: ChartDrawerState, action: ChartDrawerActio
             return {...state, selectedHarmonic: action.index};
         case event.TOGGLE_ADD_DIALOG:
             return {...state, addDialogVisible: !state.addDialogVisible};
+        case event.SELECT_TAB:
+            return {...state, tabSelected: action.newValue};
         case event.ADD_HARMONIC:
             return {
                 ...state, harmonics: [
