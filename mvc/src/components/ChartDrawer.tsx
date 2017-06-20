@@ -19,7 +19,7 @@ interface ChardDrawerProps {
     onDeleteClicked: (index: number) => void;
     onAddClicked: () => void;
     onCancelClicked: () => void;
-    onAddHarmonicChange: (newHarmonic: Harmonic) => void;
+    onHarmonicChange: (harmonic: Harmonic, index: number) => void;
     onTabSelected: (newValue: string) => void;
 }
 
@@ -27,18 +27,18 @@ export default function ChartDrawer (props: ChardDrawerProps )  {
 
     if (props.harmonics.length === 0) {
         return (
-            <Paper style={style.main_window} zDepth={1}>
+            <Paper style={style.mainWindow} zDepth={1}>
                 <AppBar
                     title="Chart Drawer"
                     iconClassNameRight="muidocs-icon-navigation-expand-more"
                 />
-                <RaisedButton onClick={props.onAddDialogClicked} label="Add New" style={style.empty_list_add} />
+                <RaisedButton onClick={props.onAddDialogClicked} label="Add New" style={style.emptyListAdd} />
                 <AddHarmonicDialog
                     onAddClicked={props.onAddClicked}
                     onCancelClicked={props.onCancelClicked}
                     visible={props.addDialogVisible}
                     tmpHarmonic={props.tmpHarmonic}
-                    onHarmonicChange={props.onAddHarmonicChange}
+                    onHarmonicChange={props.onHarmonicChange}
                 />
             </Paper>
         );
@@ -48,12 +48,12 @@ export default function ChartDrawer (props: ChardDrawerProps )  {
     let chartData = selectedHarmonic.getData([0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5]);
 
     return (
-        <Paper style={style.main_window} zDepth={1}>
+        <Paper style={style.mainWindow} zDepth={1}>
             <AppBar
                 title="Chart Drawer"
                 iconClassNameRight="muidocs-icon-navigation-expand-more"
             />
-            <Paper style={style.harmonic_list} zDepth={0}>
+            <Paper style={style.harmonicList} zDepth={0}>
                 <HarmonicsList
                     onSelectHarmonic={props.onSelectHarmonic}
                     harmonics={props.harmonics}
@@ -69,10 +69,15 @@ export default function ChartDrawer (props: ChardDrawerProps )  {
                     onCancelClicked={props.onCancelClicked}
                     visible={props.addDialogVisible}
                     tmpHarmonic={props.tmpHarmonic}
-                    onHarmonicChange={props.onAddHarmonicChange}
+                    onHarmonicChange={props.onHarmonicChange}
                 />
             </Paper>
-            <HarmonicsDetailed name="show" readonly={true} harmonic={selectedHarmonic} />
+            <HarmonicsDetailed
+                name="show"
+                harmonic={selectedHarmonic}
+                onHarmonicChange={props.onHarmonicChange}
+                index={props.selected}
+            />
             <Tabs
                 style={style.tabs}
                 value={props.tabSelected}

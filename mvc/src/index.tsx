@@ -14,7 +14,7 @@ import { Provider } from 'react-redux';
 import Harmonic from './components/Harmonic';
 import {harmonicFunctionType} from './constants/harmonicFunctionType';
 
-let injectTapEventPlugin = require("react-tap-event-plugin");
+let injectTapEventPlugin = require('react-tap-event-plugin');
 injectTapEventPlugin();
 
 let harmonicsList = [] as Harmonic[];

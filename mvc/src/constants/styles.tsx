@@ -1,4 +1,4 @@
-export const main_window = {
+export const mainWindow = {
     width: 1024,
     margin: 20,
     textAlign: 'left',
@@ -6,7 +6,7 @@ export const main_window = {
     minHeight: 300
 };
 
-export const harmonic_list = {
+export const harmonicList = {
     textAlign: 'left',
     display: 'inline-block',
     verticalAlign: 'top',
@@ -14,7 +14,7 @@ export const harmonic_list = {
     marginLeft: 20
 };
 
-export const harmonic_detailed = {
+export const harmonicDetailed = {
     width: 300,
     minHeight: 250,
     padding: 20,
@@ -23,11 +23,11 @@ export const harmonic_detailed = {
     verticalAlign: 'top'
 };
 
-export const empty_list_add = {
+export const emptyListAdd = {
     margin: 20
 };
 
-export const add_harmonic_dialog = {
+export const addHarmonicDialog = {
     width: 400
 };
 
@@ -35,7 +35,7 @@ export const chart = {
     padding: 20
 };
 
-export const harmonic_list_inner = {
+export const harmonicListInner = {
     height: 250,
     overflowY: 'auto'
 };

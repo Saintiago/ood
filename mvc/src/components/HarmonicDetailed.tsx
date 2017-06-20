@@ -7,9 +7,9 @@ import * as style from '../constants/styles';
 
 export interface HarmonicDetailedProps {
     harmonic: Harmonic;
+    index: number;
     name: string;
-    readonly: boolean;
-    onHarmonicChange?: (newHarmonic: Harmonic) => void;
+    onHarmonicChange: (newHarmonic: Harmonic, index: number) => void;
 }
 
 interface RadioChoice {
@@ -26,28 +26,33 @@ export default function HarmonicDetailed(props: HarmonicDetailedProps) {
     radiosArray.push({label: sin, value: sin, checked: (harmonicFunctionType.Sin === props.harmonic.harmonicFunction)});
     radiosArray.push({label: cos, value: cos, checked: (harmonicFunctionType.Cos === props.harmonic.harmonicFunction)});
 
-    let onHarmonicChange = (typeof props.onHarmonicChange !== 'undefined') ? props.onHarmonicChange : () => { return; };
-    let localHarmonic = props.harmonic;
+    let localHarmonic = new Harmonic(
+        props.harmonic.amplitude,
+        props.harmonic.frequency,
+        props.harmonic.phase,
+        props.harmonic.harmonicFunction
+    );
+
     let handleAmplitudeChange = (value: number) => {
         localHarmonic.amplitude = value;
-        onHarmonicChange(localHarmonic);
+        props.onHarmonicChange(localHarmonic, props.index);
     };
 
     let handleFrequencyChange = (value: number) => {
         localHarmonic.frequency = value;
-        onHarmonicChange(localHarmonic);
+        props.onHarmonicChange(localHarmonic, props.index);
     };
 
     let handlePhaseChange = (value: number) => {
         localHarmonic.phase = value;
-        onHarmonicChange(localHarmonic);
+        props.onHarmonicChange(localHarmonic, props.index);
     };
 
     let handleHFunctionChange = (value: string) => {
         localHarmonic.harmonicFunction = (value === 'Sin')
             ? harmonicFunctionType.Sin
             : harmonicFunctionType.Cos;
-        onHarmonicChange(localHarmonic);
+        props.onHarmonicChange(localHarmonic, props.index);
     };
 
     function LabelledProperty(
@@ -55,7 +60,6 @@ export default function HarmonicDetailed(props: HarmonicDetailedProps) {
         ) {
         return (
             <TextField
-                readOnly={props.readonly}
                 hintText={label}
                 defaultValue={value.toString()}
                 floatingLabelText={label}
@@ -72,9 +76,9 @@ export default function HarmonicDetailed(props: HarmonicDetailedProps) {
             let radio = radios[i];
             return (
             <RadioButton
+                key={i}
                 value={radio.value}
                 label={radio.label}
-                disabled={props.readonly}
             />
             );
         };
@@ -96,7 +100,7 @@ export default function HarmonicDetailed(props: HarmonicDetailedProps) {
     }
 
     return (
-        <div style={style.harmonic_detailed}>
+        <div style={style.harmonicDetailed}>
             <LabelledProperty label="amplitude" value={props.harmonic.amplitude} onChange={handleAmplitudeChange} />
             <RadioButtons radios={radiosArray} onChange={handleHFunctionChange} />
             <LabelledProperty label="frequency" value={props.harmonic.frequency} onChange={handleFrequencyChange} />

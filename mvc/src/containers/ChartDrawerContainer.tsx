@@ -4,7 +4,13 @@ import { ChartDrawerState } from '../types/ChartDrawerState';
 import { connect, Dispatch } from 'react-redux';
 import Harmonic from '../components/Harmonic';
 
-export function mapStateToProps({ harmonics, tmpHarmonic, selectedHarmonic, addDialogVisible, tabSelected }: ChartDrawerState) {
+export function mapStateToProps({
+                                    harmonics,
+                                    tmpHarmonic,
+                                    selectedHarmonic,
+                                    addDialogVisible,
+                                    tabSelected
+}: ChartDrawerState) {
     return {
         harmonics,
         tmpHarmonic,
@@ -20,7 +26,7 @@ export function mapDispatchToProps(dispatch: Dispatch<actions.SelectHarmonic>) {
         onAddDialogClicked: () => dispatch(actions.toggleAddDialog()),
         onAddClicked: () => dispatch(actions.addHarmonic()),
         onCancelClicked: () => dispatch(actions.toggleAddDialog()),
-        onAddHarmonicChange: (newHarmonic: Harmonic) => dispatch(actions.addHarmonicChange(newHarmonic)),
+        onHarmonicChange: (harmonic: Harmonic, index: number) => dispatch(actions.harmonicChange(harmonic, index)),
         onDeleteClicked: (index: number) => dispatch(actions.deleteHarmonic(index)),
         onTabSelected: (newValue: string) => dispatch(actions.selectTab(newValue))
     };

@@ -14,6 +14,6 @@ export default function HarmonicLineChart(props: HarmonicLineChartProps) {
         }
     ];
     return (
-        <LineChart yMin="-5" yMax="5" width={984} height={400} data={data} />
+        <LineChart yMin={-5} yMax={5} width={984} height={400} data={data} />
     );
 }

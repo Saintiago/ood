@@ -9,23 +9,18 @@ interface AddHarmonicDialogProps {
     tmpHarmonic: Harmonic;
     onAddClicked: () => void;
     onCancelClicked: () => void;
-    onHarmonicChange: (newHarmonic: Harmonic) => void;
+    onHarmonicChange: (newHarmonic: Harmonic, index: number) => void;
 }
 
 export default function AddHarmonicDialog(props: AddHarmonicDialogProps) {
 
     const actions = [
-        <FlatButton
-            label="Cancel"
-            primary={false}
-            onClick={props.onCancelClicked}
-        />,
-        <FlatButton
-            label="Add"
-            primary={true}
-            keyboardFocused={true}
-            onClick={props.onAddClicked}
-        />,
+        (
+            <FlatButton label="Cancel" primary={false} onClick={props.onCancelClicked} />
+        ),
+        (
+            <FlatButton label="Add" primary={true} keyboardFocused={true} onClick={props.onAddClicked} />
+        )
     ];
 
     return  (
@@ -34,14 +29,14 @@ export default function AddHarmonicDialog(props: AddHarmonicDialogProps) {
             actions={actions}
             modal={false}
             open={props.visible}
-            contentStyle={style.add_harmonic_dialog}
+            contentStyle={style.addHarmonicDialog}
             onRequestClose={props.onCancelClicked}
         >
             <HarmonicDetailed
                 name="add"
-                readonly={false}
                 harmonic={props.tmpHarmonic}
                 onHarmonicChange={props.onHarmonicChange}
+                index={-1}
             />
         </Dialog>
     );

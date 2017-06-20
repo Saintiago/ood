@@ -22,8 +22,16 @@ export function selectHarmonic(state: ChartDrawerState, action: ChartDrawerActio
                 addDialogVisible: false,
                 selectedHarmonic: state.harmonics.length
             };
-        case event.ADD_HARMONIC_CHANGE:
-            return { ...state, tmpHarmonic: action.harmonic };
+        case event.HARMONIC_CHANGE:
+
+            if (action.index === -1) {
+                return { ...state, tmpHarmonic: action.harmonic };
+            } else {
+                let newHarmonics = state.harmonics;
+                newHarmonics[action.index] = action.harmonic;
+                return { ...state, harmonics: newHarmonics};
+            }
+
         case event.DELETE_HARMONIC:
             let harmonics = state.harmonics;
             delete harmonics[action.index];

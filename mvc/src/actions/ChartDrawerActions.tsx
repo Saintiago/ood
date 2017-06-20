@@ -21,21 +21,22 @@ export interface ToggleAddDialog {
 
 export interface SelectTab {
     type: constants.SELECT_TAB;
-    newValue: string
+    newValue: string;
 }
 
-export interface AddHarmonicChange {
-    type: constants.ADD_HARMONIC_CHANGE;
+export interface HarmonicChange {
+    type: constants.HARMONIC_CHANGE;
     harmonic: Harmonic;
+    index: number;
 }
 
 export type ChartDrawerAction =
     SelectHarmonic
     | ToggleAddDialog
     | AddHarmonic
-    | AddHarmonicChange
     | DeleteHarmonic
-    | SelectTab;
+    | SelectTab
+    | HarmonicChange;
 
 export function selectHarmonic(index: number): SelectHarmonic {
     return {
@@ -70,10 +71,11 @@ export function selectTab(newValue: string): SelectTab {
     };
 }
 
-export function addHarmonicChange(harmonic: Harmonic): AddHarmonicChange {
+export function harmonicChange(harmonic: Harmonic, index: number): HarmonicChange {
     return {
-        type: constants.ADD_HARMONIC_CHANGE,
-        harmonic
+        type: constants.HARMONIC_CHANGE,
+        harmonic,
+        index
     };
 }
 

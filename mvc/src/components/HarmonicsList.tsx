@@ -15,6 +15,7 @@ export default function HarmonicsList({harmonics, selected, onSelectHarmonic}: H
     let renderHarmonic = function(i: number) {
         return (
             <ListItem
+                key={i}
                 value={i}
                 primaryText={getHarmonicString(harmonics[i])}
                 onClick={() => onSelectHarmonic(i)}
@@ -33,7 +34,7 @@ export default function HarmonicsList({harmonics, selected, onSelectHarmonic}: H
     let SelectableList = makeSelectable(List);
 
     return (
-        <SelectableList style={style.harmonic_list_inner} value={selected}>
+        <SelectableList style={style.harmonicListInner} value={selected}>
             {renderHarmonicsList()}
         </SelectableList>
     );
