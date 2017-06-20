@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {harmonicFunctionType} from '../constants/harmonicFunctionType';
 import Harmonic from './Harmonic';
-import {getHarmonicFunctionString} from './HarmonicString';
-import {Paper, TextField, RadioButton, RadioButtonGroup} from 'material-ui';
+import {getHarmonicFunctionString} from './HarmonicsList';
+import {TextField, RadioButton, RadioButtonGroup} from 'material-ui';
+import * as style from '../constants/styles';
 
 export interface HarmonicDetailedProps {
     harmonic: Harmonic;
@@ -71,11 +72,9 @@ export default function HarmonicDetailed(props: HarmonicDetailedProps) {
             let radio = radios[i];
             return (
             <RadioButton
-                style={{display: 'inline-block'}}
                 value={radio.value}
                 label={radio.label}
                 disabled={props.readonly}
-                onChange={(e: React.FormEvent<HTMLInputElement>, newValue: string) => onChange(newValue)}
             />
             );
         };
@@ -86,26 +85,22 @@ export default function HarmonicDetailed(props: HarmonicDetailedProps) {
         }
 
         return (
-            <RadioButtonGroup name={props.name + 'RadioButtons'} valueSelected={getHarmonicFunctionString(props.harmonic.harmonicFunction)}>
+            <RadioButtonGroup
+                name={props.name + 'RadioButtons'}
+                valueSelected={getHarmonicFunctionString(props.harmonic.harmonicFunction)}
+                onChange={(e: React.FormEvent<HTMLInputElement>, newValue: string) => onChange(newValue)}
+            >
                 {radioChoices}
             </RadioButtonGroup>
         );
     }
 
-    const style = {
-        width: 300,
-        margin: 20,
-        padding: 20,
-        textAlign: 'left',
-        display: 'inline-block',
-    };
-
     return (
-        <Paper style={style} zDepth={1} >
+        <div style={style.harmonic_detailed}>
             <LabelledProperty label="amplitude" value={props.harmonic.amplitude} onChange={handleAmplitudeChange} />
             <RadioButtons radios={radiosArray} onChange={handleHFunctionChange} />
             <LabelledProperty label="frequency" value={props.harmonic.frequency} onChange={handleFrequencyChange} />
             <LabelledProperty label="phase" value={props.harmonic.phase} onChange={handlePhaseChange} />
-        </Paper>
+        </div>
     );
 }

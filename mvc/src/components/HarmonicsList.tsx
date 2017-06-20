@@ -2,6 +2,7 @@ import * as React from 'react';
 import Harmonic from './Harmonic';
 import {harmonicFunctionType} from '../constants/harmonicFunctionType';
 import {List, ListItem, makeSelectable} from 'material-ui';
+import * as style from '../constants/styles';
 
 interface HarmonicsListProps {
     harmonics: Harmonic[];
@@ -32,13 +33,13 @@ export default function HarmonicsList({harmonics, selected, onSelectHarmonic}: H
     let SelectableList = makeSelectable(List);
 
     return (
-        <SelectableList value={selected}>
+        <SelectableList style={style.harmonic_list_inner} value={selected}>
             {renderHarmonicsList()}
         </SelectableList>
     );
 }
 
-function getHarmonicFunctionString(type: harmonicFunctionType) {
+export function getHarmonicFunctionString(type: harmonicFunctionType) {
     if (type === harmonicFunctionType.Sin) {
         return 'sin';
     }
