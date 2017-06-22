@@ -8,10 +8,12 @@
     "@types/react": "^15.0.25",
     "@types/react-dom": "^15.5.0",
     "@types/react-redux": "^4.4.40",
+    "material-ui": "^0.18.3",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-linechart": "^1.1.9",
     "react-redux": "^5.0.5",
+    "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0"
   },
   "devDependencies": {

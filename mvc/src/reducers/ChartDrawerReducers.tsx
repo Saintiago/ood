@@ -33,10 +33,13 @@ export function selectHarmonic(state: ChartDrawerState, action: ChartDrawerActio
         case event.DELETE_HARMONIC:
             let harmonics = state.harmonics;
             delete harmonics[action.index];
+            let newHarmonics = harmonics.filter(n => n);
+            let newSelectedIndex = Math.max(0, state.selectedHarmonicIndex - 1);
             return {
                 ...state,
-                harmonics: harmonics.filter(n => n),
-                selectedHarmonicIndex: Math.max(0, state.selectedHarmonicIndex - 1)
+                harmonics: newHarmonics,
+                selectedHarmonicIndex: newSelectedIndex,
+                selectedHarmonic: newHarmonics[newSelectedIndex]
             };
         default:
             return state;

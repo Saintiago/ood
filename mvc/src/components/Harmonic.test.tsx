@@ -5,6 +5,14 @@ it('can be constructed', () => {
     new Harmonic(1, 1, 1, harmonicFunctionType.Sin);
 });
 
+it('can return data for graph', () => {
+    let testHarmonic = new Harmonic(4.5, 23, -1, harmonicFunctionType.Sin);
+    let graphData = testHarmonic.getData([0, 1, 2]);
+    expect(graphData[0].y).toBeCloseTo(-3.787);
+    expect(graphData[1].y).toBeCloseTo(-0.04);
+    expect(graphData[2].y).toBeCloseTo(3.829);
+});
+
 /*it('can calculate Y for given X', () => {
     let testHarmonic = new Harmonic(1, 1, 1, harmonicFunctionType.Sin);
     expect(testHarmonic.getY(0)).toBeCloseTo(0.841);
