@@ -34,22 +34,28 @@ export default function HarmonicDetailed(props: HarmonicDetailedProps) {
     );
 
     let handleAmplitudeChange = (value: number) => {
-        localHarmonic.amplitude = value;
-        props.onHarmonicChange(localHarmonic, props.index);
+        if (!isNaN(value)) {
+            localHarmonic.amplitude = value;
+            props.onHarmonicChange(localHarmonic, props.index);
+        }
     };
 
     let handleFrequencyChange = (value: number) => {
-        localHarmonic.frequency = value;
-        props.onHarmonicChange(localHarmonic, props.index);
+        if (!isNaN(value)) {
+            localHarmonic.frequency = value;
+            props.onHarmonicChange(localHarmonic, props.index);
+        }
     };
 
     let handlePhaseChange = (value: number) => {
-        localHarmonic.phase = value;
-        props.onHarmonicChange(localHarmonic, props.index);
+        if (!isNaN(value)) {
+            localHarmonic.phase = value;
+            props.onHarmonicChange(localHarmonic, props.index);
+        }
     };
 
     let handleHFunctionChange = (value: string) => {
-        localHarmonic.harmonicFunction = (value === 'Sin')
+        localHarmonic.harmonicFunction = (value === 'sin')
             ? harmonicFunctionType.Sin
             : harmonicFunctionType.Cos;
         props.onHarmonicChange(localHarmonic, props.index);
