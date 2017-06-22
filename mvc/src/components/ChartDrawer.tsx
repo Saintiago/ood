@@ -10,6 +10,7 @@ import * as style from '../constants/styles';
 
 interface ChardDrawerProps {
     harmonics: Harmonic[];
+    selectedHarmonic: Harmonic;
     tmpHarmonic: Harmonic;
     selected: number;
     addDialogVisible: boolean;
@@ -44,8 +45,7 @@ export default function ChartDrawer (props: ChardDrawerProps )  {
         );
     }
 
-    let selectedHarmonic = props.harmonics[props.selected];
-    let chartData = selectedHarmonic.getData([0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5]);
+    let chartData = props.selectedHarmonic.getData([0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5]);
 
     return (
         <Paper style={style.mainWindow} zDepth={1}>
@@ -57,6 +57,7 @@ export default function ChartDrawer (props: ChardDrawerProps )  {
                 <HarmonicsList
                     onSelectHarmonic={props.onSelectHarmonic}
                     harmonics={props.harmonics}
+                    selectedHarmonic={props.selectedHarmonic}
                     selected={props.selected}
                 />
                 <RaisedButton onClick={props.onAddDialogClicked} label="Add New" />
@@ -74,7 +75,7 @@ export default function ChartDrawer (props: ChardDrawerProps )  {
             </Paper>
             <HarmonicsDetailed
                 name="show"
-                harmonic={selectedHarmonic}
+                harmonic={props.selectedHarmonic}
                 onHarmonicChange={props.onHarmonicChange}
                 index={props.selected}
             />

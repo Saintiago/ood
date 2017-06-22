@@ -6,15 +6,17 @@ import Harmonic from '../components/Harmonic';
 
 export function mapStateToProps({
                                     harmonics,
-                                    tmpHarmonic,
                                     selectedHarmonic,
+                                    tmpHarmonic,
+                                    selectedHarmonicIndex,
                                     addDialogVisible,
                                     tabSelected
 }: ChartDrawerState) {
     return {
         harmonics,
+        selectedHarmonic,
         tmpHarmonic,
-        selected: selectedHarmonic,
+        selected: selectedHarmonicIndex,
         addDialogVisible,
         tabSelected
     };

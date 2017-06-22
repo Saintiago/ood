@@ -6,18 +6,22 @@ import * as style from '../constants/styles';
 
 interface HarmonicsListProps {
     harmonics: Harmonic[];
+    selectedHarmonic: Harmonic;
     selected: number;
     onSelectHarmonic: (index: number) => void;
 }
 
-export default function HarmonicsList({harmonics, selected, onSelectHarmonic}: HarmonicsListProps) {
+export default function HarmonicsList({harmonics, selected, selectedHarmonic, onSelectHarmonic}: HarmonicsListProps) {
 
     let renderHarmonic = function(i: number) {
+
+        let harmonic = (i === selected) ? selectedHarmonic : harmonics[i];
+
         return (
             <ListItem
                 key={i}
                 value={i}
-                primaryText={getHarmonicString(harmonics[i])}
+                primaryText={getHarmonicString(harmonic)}
                 onClick={() => onSelectHarmonic(i)}
             />
         );
@@ -50,7 +54,7 @@ export function getHarmonicFunctionString(type: harmonicFunctionType) {
     throw new Error('Unknown harmonic function: ' + type);
 }
 
-function getHarmonicString(harmonic: Harmonic) {
+export function getHarmonicString(harmonic: Harmonic) {
 
     let prependPlusIfPositive = (x: number): string => {
         return (x >= 0) ? ' + ' + x : ' ' + x;

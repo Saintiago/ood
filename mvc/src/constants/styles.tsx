@@ -43,3 +43,7 @@ export const harmonicListInner = {
 export const tabs = {
     marginTop: 20
 };
+
+export const addHarmonicDialogPreview = {
+    marginTop: 20
+};

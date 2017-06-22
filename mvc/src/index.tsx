@@ -25,8 +25,9 @@ harmonicsList.push(new Harmonic(1, 1, 3, harmonicFunctionType.Sin));
 
 const store = createStore<ChartDrawerState>(selectHarmonic, {
     harmonics: harmonicsList,
+    selectedHarmonic: harmonicsList[0],
     tmpHarmonic: new Harmonic(0, 0, 0, harmonicFunctionType.Sin),
-    selectedHarmonic: 0,
+    selectedHarmonicIndex: 0,
     addDialogVisible: false,
     tabSelected: 'line'
 });

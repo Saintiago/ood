@@ -3,6 +3,7 @@ import HarmonicDetailed from './HarmonicDetailed';
 import Harmonic from './Harmonic';
 import { Dialog, FlatButton } from 'material-ui';
 import * as style from '../constants/styles';
+import {getHarmonicString} from './HarmonicsList';
 
 interface AddHarmonicDialogProps {
     visible: boolean;
@@ -38,6 +39,9 @@ export default function AddHarmonicDialog(props: AddHarmonicDialogProps) {
                 onHarmonicChange={props.onHarmonicChange}
                 index={-1}
             />
+            <div style={style.addHarmonicDialogPreview}>
+                {getHarmonicString(props.tmpHarmonic)}
+            </div>
         </Dialog>
     );
 }
