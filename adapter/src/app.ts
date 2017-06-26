@@ -26,4 +26,8 @@ export function PaintPictureOnModernGraphicsRenderer() {
     const rendererAdapter = new adapter.CModernGraphicsRendererAdapter(renderer);
     const painter = new shape_drawing_lib.CCanvasPainter(rendererAdapter);
     PaintPicture(painter);
+
+    const rendererAdapterClass = new adapter.CModernGraphicsRendererAdapterClass(new stream.Cout());
+    const painterWithClassAdapter = new shape_drawing_lib.CCanvasPainter(rendererAdapterClass);
+    PaintPicture(painterWithClassAdapter);
 }
