@@ -36,13 +36,9 @@ export class CRectangle implements ICanvasDrawable {
 
 // Художник, способный рисовать ICanvasDrawable-объекты на ICanvas
 export class CCanvasPainter {
-    constructor(canvas: graphics_lib.ICanvas) {
-        // TODO: дописать конструктор класса
-    }
+    constructor(private canvas: graphics_lib.ICanvas) {}
 
     public Draw(drawable: ICanvasDrawable) {
-        // TODO: дописать код рисования ICanvasDrawable на canvas, переданном в конструктор
+        drawable.Draw(this.canvas);
     }
-
-    // TODO: дописать приватную часть
 }
