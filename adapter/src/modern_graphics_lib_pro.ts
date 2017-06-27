@@ -6,7 +6,10 @@ export class CPoint {
 
 // Цвет в формате RGBA, каждый компонент принимает значения от 0.0f до 1.0f
 export class CRGBAColor {
-    constructor(public r: number, public g: number, public b: number, public a: number) {}
+    constructor(public r: number = 0,
+                public g: number = 0,
+                public b: number = 0,
+                public a: number = 1) {}
 }
 
 // Класс для современного рисования графики
@@ -15,9 +18,10 @@ export class CModernGraphicsRenderer {
     private drawing: boolean = false;
 
     constructor(private out: stream.IOutputStream) {
+        this.BeginDraw();
     }
 
-    public destructor() {
+    public Destructor() {
         if (this.drawing) {
             this.EndDraw();
         }
@@ -33,12 +37,21 @@ export class CModernGraphicsRenderer {
     }
 
     // Выполняет рисование линии
-    public DrawLine(start: CPoint, end: CPoint) {
-        // TODO: выводит в output инструкцию для рисования линии в виде
-        // <line fromX="3" fromY="5" toX="5" toY="17">
-        //   <color r="0.35" g="0.47" b="1.0" a="1.0" />
-        // </line>
-        // Можно вызывать только между BeginDraw() и EndDraw()
+    public DrawLine(start: CPoint, end: CPoint, color: CRGBAColor = new CRGBAColor()) {
+        if (!this.drawing) {
+            throw Error("DrawLine is allowed between BeginDraw()/EndDraw() only");
+        }
+
+        this.out.write(
+            '<line fromX="' + start.x + '" fromY="' + start.y + '" toX="' + end.x + '" toY="' + end.y + '">');
+
+        this.out.write('<color ' +
+            'r="' + color.r.toFixed(2) + '" ' +
+            'g="' + color.g.toFixed(2) + '" ' +
+            'b="' + color.b.toFixed(2) + '" ' +
+            'a="' + color.a.toFixed(2) + '" />');
+
+        this.out.write('</line>');
     }
 
     public EndDraw() {

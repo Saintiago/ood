@@ -7,7 +7,9 @@
     "rules": {
         "max-classes-per-file": [false],
         "no-console": false,
-        "quotemark": false
+        "quotemark": false,
+        "interface-name": false,
+        "no-bitwise": false
     },
     "rulesDirectory": []
 }
