@@ -49,6 +49,5 @@ export class CCanvasPainter {
 
     public Draw(drawable: ICanvasDrawable) {
         drawable.Draw(this.canvas);
-        this.canvas.Destructor();
     }
 }

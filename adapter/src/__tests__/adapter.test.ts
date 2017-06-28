@@ -43,6 +43,7 @@ function testAdapterDrawTriangle(adapter: graphics_lib_pro.ICanvas) {
     const painter = new shape_drawing_lib.CCanvasPainter(adapter);
 
     painter.Draw(triangle);
+    adapter.Destructor();
     expect(TestCout.buffer).toBe(
         '<draw>' +
             '<line fromX="10" fromY="15" toX="100" toY="200">' +
