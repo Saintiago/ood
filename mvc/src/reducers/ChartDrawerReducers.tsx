@@ -4,9 +4,12 @@ import * as event from '../constants/ChartDrawerEvents';
 import Harmonic from '../components/Harmonic';
 import {harmonicFunctionType} from '../constants/harmonicFunctionType';
 
-export function selectHarmonic(state: ChartDrawerState, action: ChartDrawerAction): ChartDrawerState {
+export function chartDrawerReducer(state: ChartDrawerState, action: ChartDrawerAction): ChartDrawerState {
     switch (action.type) {
         case event.SELECT_HARMONIC:
+            if (action.index < 0 || action.index >= state.harmonics.length) {
+                throw new RangeError();
+            }
             return {...state, selectedHarmonic: state.harmonics[action.index], selectedHarmonicIndex: action.index};
         case event.TOGGLE_ADD_DIALOG:
             return {...state, addDialogVisible: !state.addDialogVisible};
@@ -23,7 +26,9 @@ export function selectHarmonic(state: ChartDrawerState, action: ChartDrawerActio
                 selectedHarmonicIndex: state.harmonics.length
             };
         case event.HARMONIC_CHANGE:
-
+            if (action.index < -1 || action.index >= state.harmonics.length) {
+                throw new RangeError();
+            }
             if (action.index === -1) {
                 return { ...state, tmpHarmonic: action.harmonic };
             } else {
@@ -31,6 +36,9 @@ export function selectHarmonic(state: ChartDrawerState, action: ChartDrawerActio
             }
 
         case event.DELETE_HARMONIC:
+            if (action.index < 0 || action.index >= state.harmonics.length) {
+                throw new RangeError();
+            }
             let harmonics = state.harmonics;
             delete harmonics[action.index];
             let newHarmonics = harmonics.filter(n => n);

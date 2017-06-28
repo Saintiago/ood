@@ -5,7 +5,7 @@ import {MuiThemeProvider} from 'material-ui';
 import './index.css';
 
 import { createStore } from 'redux';
-import { selectHarmonic } from './reducers/ChartDrawerReducers';
+import { chartDrawerReducer } from './reducers/ChartDrawerReducers';
 import { ChartDrawerState } from './types/ChartDrawerState';
 
 import ChartDrawerContainer from './containers/ChartDrawerContainer';
@@ -23,7 +23,7 @@ harmonicsList.push(new Harmonic(4.5, 23, -1, harmonicFunctionType.Sin));
 harmonicsList.push(new Harmonic(-11, 4, 1, harmonicFunctionType.Cos));
 harmonicsList.push(new Harmonic(1, 1, 3, harmonicFunctionType.Sin));
 
-const store = createStore<ChartDrawerState>(selectHarmonic, {
+const store = createStore<ChartDrawerState>(chartDrawerReducer, {
     harmonics: harmonicsList,
     selectedHarmonic: harmonicsList[0],
     tmpHarmonic: new Harmonic(0, 0, 0, harmonicFunctionType.Sin),
