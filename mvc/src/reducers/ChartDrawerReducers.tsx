@@ -16,14 +16,16 @@ export function chartDrawerReducer(state: ChartDrawerState, action: ChartDrawerA
         case event.SELECT_TAB:
             return {...state, tabSelected: action.newValue};
         case event.ADD_HARMONIC:
+            let newTmpHarmonic = new Harmonic(0, 0, 0, harmonicFunctionType.Sin);
             return {
                 ...state, harmonics: [
                     ...state.harmonics,
                     state.tmpHarmonic
                 ],
-                tmpHarmonic: new Harmonic(0, 0, 0, harmonicFunctionType.Sin),
+                tmpHarmonic: newTmpHarmonic,
                 addDialogVisible: false,
-                selectedHarmonicIndex: state.harmonics.length
+                selectedHarmonicIndex: state.harmonics.length,
+                selectedHarmonic: newTmpHarmonic
             };
         case event.HARMONIC_CHANGE:
             if (action.index < -1 || action.index >= state.harmonics.length) {
