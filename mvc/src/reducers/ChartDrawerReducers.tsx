@@ -3,55 +3,86 @@ import {ChartDrawerState} from '../types/ChartDrawerState';
 import * as event from '../constants/ChartDrawerEvents';
 import Harmonic from '../components/Harmonic';
 import {harmonicFunctionType} from '../constants/harmonicFunctionType';
+import History from '../lib/history';
+
+let harmonicsList = [] as Harmonic[];
+
+harmonicsList.push(new Harmonic(4.5, 23, -1, harmonicFunctionType.Sin));
+harmonicsList.push(new Harmonic(-11, 4, 1, harmonicFunctionType.Cos));
+harmonicsList.push(new Harmonic(1, 1, 3, harmonicFunctionType.Sin));
+
+let history = new History({
+    harmonics: harmonicsList,
+    selectedHarmonic: harmonicsList[0],
+    tmpHarmonic: new Harmonic(0, 0, 0, harmonicFunctionType.Sin),
+    selectedHarmonicIndex: 0,
+    addDialogVisible: false,
+    tabSelected: 'line'
+});
 
 export function chartDrawerReducer(state: ChartDrawerState, action: ChartDrawerAction): ChartDrawerState {
+
+    let newState = {...state};
+
     switch (action.type) {
         case event.SELECT_HARMONIC:
-            if (action.index < 0 || action.index >= state.harmonics.length) {
+            if (action.index < 0 || action.index >= newState.harmonics.length) {
                 throw new RangeError();
             }
-            return {...state, selectedHarmonic: state.harmonics[action.index], selectedHarmonicIndex: action.index};
+            newState.selectedHarmonic = newState.harmonics[action.index];
+            newState.selectedHarmonicIndex = action.index;
+            history.addNewSnapshot({...newState});
+            break;
         case event.TOGGLE_ADD_DIALOG:
-            return {...state, addDialogVisible: !state.addDialogVisible};
+            newState.addDialogVisible = !newState.addDialogVisible;
+            break;
+        case event.UNDO:
+            history.undo();
+            return history.getLastState();
+        case event.REDO:
+            history.redo();
+            return history.getLastState();
         case event.SELECT_TAB:
-            return {...state, tabSelected: action.newValue};
+            newState.tabSelected = action.newValue;
+            break;
         case event.ADD_HARMONIC:
             let newTmpHarmonic = new Harmonic(0, 0, 0, harmonicFunctionType.Sin);
-            return {
-                ...state, harmonics: [
-                    ...state.harmonics,
-                    state.tmpHarmonic
-                ],
-                tmpHarmonic: newTmpHarmonic,
-                addDialogVisible: false,
-                selectedHarmonicIndex: state.harmonics.length,
-                selectedHarmonic: newTmpHarmonic
-            };
+            newState.harmonics = [
+                ...newState.harmonics,
+                newState.tmpHarmonic
+            ];
+            newState.selectedHarmonicIndex = Math.max(0, newState.harmonics.length - 1);
+            newState.selectedHarmonic = newState.tmpHarmonic;
+            newState.tmpHarmonic = newTmpHarmonic;
+            newState.addDialogVisible = false;
+            history.addNewSnapshot({...newState});
+            break;
         case event.HARMONIC_CHANGE:
-            if (action.index < -1 || action.index >= state.harmonics.length) {
+            if (action.index < -1 || action.index >= newState.harmonics.length) {
                 throw new RangeError();
             }
             if (action.index === -1) {
-                return { ...state, tmpHarmonic: action.harmonic };
+                newState.tmpHarmonic = action.harmonic;
             } else {
-                return { ...state, selectedHarmonic: action.harmonic};
+                newState.selectedHarmonic = action.harmonic;
             }
-
+            break;
         case event.DELETE_HARMONIC:
-            if (action.index < 0 || action.index >= state.harmonics.length) {
+            if (action.index < 0 || action.index >= newState.harmonics.length) {
                 throw new RangeError();
             }
-            let harmonics = state.harmonics;
+            let harmonics = [...newState.harmonics];
             delete harmonics[action.index];
             let newHarmonics = harmonics.filter(n => n);
-            let newSelectedIndex = Math.max(0, state.selectedHarmonicIndex - 1);
-            return {
-                ...state,
-                harmonics: newHarmonics,
-                selectedHarmonicIndex: newSelectedIndex,
-                selectedHarmonic: newHarmonics[newSelectedIndex]
-            };
+            let newSelectedIndex = Math.max(0, newState.selectedHarmonicIndex - 1);
+            newState.harmonics = newHarmonics;
+            newState.selectedHarmonicIndex = newSelectedIndex;
+            newState.selectedHarmonic = newHarmonics[newSelectedIndex];
+            history.addNewSnapshot({...newState});
+            break;
         default:
-            return state;
+            break;
     }
+
+    return newState;
 }

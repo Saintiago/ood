@@ -20,6 +20,8 @@ interface ChardDrawerProps {
     onDeleteClicked: (index: number) => void;
     onAddClicked: () => void;
     onCancelClicked: () => void;
+    onUndoClicked: () => void;
+    onRedoClicked: () => void;
     onHarmonicChange: (harmonic: Harmonic, index: number) => void;
     onTabSelected: (newValue: string) => void;
 }
@@ -41,6 +43,10 @@ export default function ChartDrawer (props: ChardDrawerProps )  {
                     tmpHarmonic={props.tmpHarmonic}
                     onHarmonicChange={props.onHarmonicChange}
                 />
+                <div>
+                    <RaisedButton onClick={props.onUndoClicked} label="Undo" />
+                    <RaisedButton onClick={props.onRedoClicked} label="Redo" />
+                </div>
             </Paper>
         );
     }
@@ -60,11 +66,17 @@ export default function ChartDrawer (props: ChardDrawerProps )  {
                     selectedHarmonic={props.selectedHarmonic}
                     selected={props.selected}
                 />
-                <RaisedButton onClick={props.onAddDialogClicked} label="Add New" />
-                <RaisedButton
-                    onClick={() => {props.onDeleteClicked(props.selected); }}
-                    label="Delete Selected"
-                />
+                <div>
+                    <RaisedButton onClick={props.onAddDialogClicked} label="Add New" />
+                    <RaisedButton
+                        onClick={() => {props.onDeleteClicked(props.selected); }}
+                        label="Delete Selected"
+                    />
+                </div>
+                <div>
+                    <RaisedButton onClick={props.onUndoClicked} label="Undo" />
+                    <RaisedButton onClick={props.onRedoClicked} label="Redo" />
+                </div>
                 <AddHarmonicDialog
                     onAddClicked={props.onAddClicked}
                     onCancelClicked={props.onCancelClicked}

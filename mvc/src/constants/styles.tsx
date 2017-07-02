@@ -10,7 +10,7 @@ export const harmonicList = {
     textAlign: 'left',
     display: 'inline-block',
     verticalAlign: 'top',
-    height: 280,
+    height: 330,
     marginLeft: 20
 };
 

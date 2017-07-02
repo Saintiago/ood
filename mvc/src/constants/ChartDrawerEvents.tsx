@@ -15,3 +15,9 @@ export type HARMONIC_CHANGE = typeof HARMONIC_CHANGE;
 
 export const SELECT_TAB = 'SELECT_TAB';
 export type SELECT_TAB = typeof SELECT_TAB;
+
+export const UNDO = 'UNDO';
+export type UNDO = typeof UNDO;
+
+export const REDO = 'REDO';
+export type REDO = typeof REDO;

@@ -30,7 +30,9 @@ export function mapDispatchToProps(dispatch: Dispatch<actions.SelectHarmonic>) {
         onCancelClicked: () => dispatch(actions.toggleAddDialog()),
         onHarmonicChange: (harmonic: Harmonic, index: number) => dispatch(actions.harmonicChange(harmonic, index)),
         onDeleteClicked: (index: number) => dispatch(actions.deleteHarmonic(index)),
-        onTabSelected: (newValue: string) => dispatch(actions.selectTab(newValue))
+        onTabSelected: (newValue: string) => dispatch(actions.selectTab(newValue)),
+        onUndoClicked: () => dispatch(actions.undo()),
+        onRedoClicked: () => dispatch(actions.redo()),
     };
 }
 

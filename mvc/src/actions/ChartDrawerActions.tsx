@@ -30,11 +30,22 @@ export interface HarmonicChange {
     index: number;
 }
 
+export interface Undo {
+    type: constants.UNDO;
+}
+
+export interface Redo {
+    type: constants.REDO;
+}
+
 export type ChartDrawerAction =
     SelectHarmonic
     | ToggleAddDialog
     | AddHarmonic
     | DeleteHarmonic
+    | SelectTab
+    | Undo
+    | Redo
     | SelectTab
     | HarmonicChange;
 
@@ -48,6 +59,18 @@ export function selectHarmonic(index: number): SelectHarmonic {
 export function addHarmonic(): AddHarmonic {
     return {
         type: constants.ADD_HARMONIC
+    };
+}
+
+export function undo(): Undo {
+    return {
+        type: constants.UNDO
+    };
+}
+
+export function redo(): Redo {
+    return {
+        type: constants.REDO
     };
 }
 
